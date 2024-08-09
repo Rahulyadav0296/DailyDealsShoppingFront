@@ -1,0 +1,42 @@
+.carousel {
+  position: relative;
+  max-width: 100%;
+  margin: auto;
+  overflow: hidden;
+  margin: 30px;
+}
+
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 2;
+  color: black;
+  border-radius: 100%;
+  align-items: center;
+}
+
+.carousel-button.prev {
+  left: 10px;
+}
+
+.carousel-button.next {
+  right: 10px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .carousel {
+    max-width: 100%;
+  }
+
+  .carousel-button {
+    font-size: 1.5rem;
+    width: 30px;
+    height: 30px;
+  }
+}

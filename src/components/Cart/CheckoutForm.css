@@ -1,0 +1,123 @@
+.payment-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.payment-options {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.payment-button {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #ffffff;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.payment-button.active {
+  border-color: #007bff;
+  background-color: #e7f0ff;
+}
+
+.payment-button svg {
+  margin-right: 8px;
+}
+
+.card-details {
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group-expire-cvv {
+  display: flex;
+  justify-content: space-between;
+}
+
+.expire-date,
+.security-code {
+  flex: 1;
+}
+
+.expire-date {
+  margin-right: 10px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 8px;
+}
+
+.card-number {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 8px;
+}
+
+.card-detail-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 8px;
+}
+
+.pay-button {
+  display: inline-block;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.pay-button:hover {
+  background-color: #0056b3;
+}
+
+.pay-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.policy-text {
+  font-size: 14px;
+  color: #555;
+  margin-top: 20px;
+}
+
+.policy-link a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.policy-link a:hover {
+  text-decoration: underline;
+}
+
+.payment-message {
+  margin-top: 20px;
+  font-size: 16px;
+  color: #28a745;
+}

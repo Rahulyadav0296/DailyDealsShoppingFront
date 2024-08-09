@@ -1,0 +1,85 @@
+.filters {
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  width: 86%;
+  margin-left: 100px;
+  flex-direction: column;
+  box-shadow: rgb(167, 178, 189) 3px 3px 6px 0px inset,
+    rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+}
+
+.filters h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #343a40;
+}
+
+.filter-price,
+.filter-ratings {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.filter-price p,
+.filter-ratings p {
+  margin: 0;
+  font-size: 18px;
+  color: #495057;
+}
+
+/* Mobile responsive styling */
+@media (max-width: 768px) {
+  .filters {
+    width: 90%;
+    margin: 20px auto;
+    padding: 15px;
+  }
+
+  .filters h1 {
+    font-size: 20px;
+  }
+
+  .filter-price,
+  .filter-ratings {
+    padding: 15px;
+    gap: 8px;
+  }
+
+  .filter-price p,
+  .filter-ratings p {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .filters {
+    width: 95%;
+    margin: 15px auto;
+    padding: 10px;
+  }
+
+  .filters h1 {
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .filter-price,
+  .filter-ratings {
+    padding: 10px;
+    gap: 6px;
+  }
+
+  .filter-price p,
+  .filter-ratings p {
+    font-size: 14px;
+  }
+}

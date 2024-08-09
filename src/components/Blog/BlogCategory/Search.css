@@ -1,0 +1,26 @@
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 40px 10px 10px; /* Add padding to make room for the icon */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.search-input::placeholder {
+  color: #aaa;
+}
+
+.search-container i {
+  position: absolute;
+  right: 10px;
+  color: #888;
+  pointer-events: none; /* Ensure icon doesn't block input */
+}

@@ -1,0 +1,140 @@
+/* CSS for Navbar Component */
+.navbar {
+  background: linear-gradient(
+    to right,
+    #1f1f1f,
+    #3a3a3a
+  ); /* Two-color gradient background */
+  border-bottom: 2px solid #4caf50; /* Green border */
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand img {
+  border-radius: 10px;
+  transition: transform 0.2s;
+  width: 72px;
+  height: 57px;
+}
+
+.navbar-brand img:hover {
+  transform: scale(1.1);
+}
+
+.navbar-toggler {
+  border: none;
+}
+
+.navbar-collapse {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navbar-nav {
+  display: flex;
+  align-items: center;
+}
+
+.nav-item {
+  margin-right: 15px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: greenyellow;
+}
+
+.nav-link .icon {
+  margin-right: 5px;
+  margin-top: 25px;
+}
+
+#navbarDropdown {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+#navbarDropdown .icon {
+  margin-left: 5px;
+}
+
+.nav-item .dropdown-menu {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav-item .dropdown-item {
+  color: black;
+  padding: 10px 20px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.nav-item .dropdown-item:hover {
+  background-color: greenyellow;
+  color: white;
+}
+
+.cart-icon {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  position: relative;
+}
+
+.cart-icon .cart-count {
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+  position: absolute;
+  top: -5px;
+  right: -10px;
+}
+
+.nav-item .dropdown-item {
+  color: black;
+  padding: 10px 20px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.nav-item .dropdown-item:hover {
+  background-color: greenyellow;
+  color: black;
+}
+
+@media (max-width: 768px) {
+  .navbar-nav {
+    flex-direction: column;
+    align-items: flex-start; /* Ensure alignment is maintained */
+  }
+
+  .nav-item {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .nav-link .icon {
+    margin-right: 5px;
+    margin-top: 0; /* Remove margin-top to keep it aligned */
+  }
+
+  .cart-icon {
+    margin-top: 0; /* Remove margin-top to keep it aligned */
+  }
+
+  #navbarDropdown {
+    margin-top: 0; /* Remove margin-top to keep it aligned */
+  }
+}

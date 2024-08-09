@@ -1,0 +1,29 @@
+/* Container for pagination and blog category */
+.blog-container {
+  display: flex;
+  flex-wrap: wrap; /* Wrap items on smaller screens */
+  gap: 20px; /* Space between items */
+  justify-content: space-between; /* Space out items */
+  padding: 20px;
+  width: 60%;
+  margin: 0 auto;
+}
+
+/* Tablet and smaller devices */
+@media (max-width: 768px) {
+  .blog-container {
+    width: 80%; /* Adjust container width */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center-align items */
+    padding: 15px; /* Adjust padding */
+  }
+}
+
+/* Mobile devices */
+@media (max-width: 480px) {
+  .blog-container {
+    width: 95%; /* Full width with small margins */
+    padding: 10px; /* Further reduce padding */
+    gap: 15px; /* Decrease gap for smaller screens */
+  }
+}

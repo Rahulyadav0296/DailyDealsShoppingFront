@@ -1,0 +1,123 @@
+.product-details {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.product-details__title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.product-details__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product-details__image {
+  max-width: 100%;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.product-details__name {
+  font-size: 2em;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+.product-details__price {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+  color: #e60023;
+}
+
+.product-details__sizes {
+  margin-bottom: 20px;
+}
+
+.product-details__sizes h4,
+.product-details__colors h4 {
+  margin-bottom: 10px;
+}
+
+.product-details__sizes ul,
+.product-details__colors ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.product-details__sizes li,
+.product-details__colors li {
+  display: inline-block;
+  margin-right: 10px;
+  padding: 5px 10px;
+  background-color: #ddd;
+  border-radius: 5px;
+}
+
+.product-details__rating {
+  margin-bottom: 20px;
+}
+
+.product-details__cart-button {
+  background-color: #e60023;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.product-details__cart-button:hover {
+  background-color: #c5001d;
+}
+
+.product-details__user-interaction {
+  margin-top: 30px;
+  width: 100%;
+}
+
+.product-details__description,
+.product-details__comments,
+.product-details__reviews {
+  margin-bottom: 20px;
+}
+
+.product-details__description h4,
+.product-details__comments h4,
+.product-details__reviews h4 {
+  margin-bottom: 10px;
+  color: #444;
+}
+
+.comment,
+.review {
+  margin-bottom: 15px;
+}
+
+.comment__user,
+.review__user {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.comment__text,
+.review__text {
+  margin-bottom: 5px;
+}
+
+.comment__date,
+.review__date {
+  color: #777;
+  font-size: 0.9em;
+}

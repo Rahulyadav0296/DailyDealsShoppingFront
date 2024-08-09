@@ -1,0 +1,36 @@
+/* Container for categories */
+.categories-container {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+/* Title styling */
+.categories-title {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+/* Individual category item styling */
+.category-item {
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  font-size: 1rem;
+  color: #555;
+  cursor: pointer;
+}
+
+/* Styling for category name */
+.category-name {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+/* Styling for category count */
+.category-count {
+  color: black;
+}

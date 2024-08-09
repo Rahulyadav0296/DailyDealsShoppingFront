@@ -1,0 +1,19 @@
+.filter-rating {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.filter-rating input {
+  cursor: pointer;
+}
+
+.filter-rating label {
+  font-size: 16px;
+  color: #495057;
+  cursor: pointer;
+}
+
+.filter-rating svg {
+  color: #ffc107;
+}
