@@ -8,6 +8,15 @@
   border-bottom: 2px solid #ff6600; /* Orange border */
 }
 
+.navbar-nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar-nav .nav-item {
+  margin-bottom: 0.5rem; /* Adjust spacing as needed */
+}
+
 .navbar-dark .navbar-nav .nav-link {
   color: #ffffff; /* White text color for links */
 }
@@ -54,4 +63,14 @@
   padding: 2px 8px;
   font-size: 0.9rem;
   margin-left: 5px;
+}
+
+@media (max-width: 768px) {
+  .navbar-nav {
+    flex-direction: column;
+  }
+
+  .navbar-nav .nav-item {
+    margin-bottom: 1rem; /* Ensure there's adequate spacing */
+  }
 }

@@ -3,10 +3,10 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import logo_ry from "../../assets/logo_ry.png"; // Update with the correct path to your logo
+import logo_ry from "../../assets/logo_ry.png";
 import { setToken } from "../../utils/authSlice";
 import ListItem from "./ListItem";
-import "./Navbar.css"; // Ensure this file contains the updated CSS
+import "./Navbar.css";
 
 const Navbar = () => {
   const token = useSelector((state) => state.auth.token);
@@ -16,28 +16,25 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const [isCollapsed, setIsCollapsed] = useState(true);
 
-  const handleToggle = () => {
-    setIsCollapsed(!isCollapsed);
-  };
+  const handleToggle = () => setIsCollapsed(!isCollapsed);
 
-  const handleLinkClick = () => {
-    setIsCollapsed(true);
-  };
+  const handleLinkClick = () => setIsCollapsed(true);
 
   const handleLogout = () => {
     dispatch(setToken(null));
     navigate("/signin");
   };
 
+  const isLoginPage = window.location.pathname === "/signin";
+
   return (
     <nav
-      className="navbar navbar-expand-md border-bottom navbar-dark mb-4 border-body"
+      className="navbar navbar-expand-md navbar-dark mb-4 border-body"
       data-bs-theme="dark"
     >
       <div className="container-fluid">
         <Link className="navbar-brand" to="/" onClick={handleLinkClick}>
           <img
-            className="mb-6"
             src={logo_ry}
             alt="The logo"
             width="72"
@@ -113,28 +110,31 @@ const Navbar = () => {
                     })}
                     className="dropdown-item"
                     to={`/signup/${userId}`}
+                    onClick={handleLinkClick}
                   >
                     My Account
                   </NavLink>
                 </div>
               </li>
             )}
-            <li className="nav-item">
-              <NavLink
-                style={({ isActive }) => ({
-                  padding: "0px 5px 20px 5px",
-                  color: isActive ? "#ff6600" : "#ffffff",
-                })}
-                className="nav-link"
-                to={`${token === null ? "/signin" : "/cart"}`}
-                onClick={handleLinkClick}
-              >
-                <div className="cart-icon">
-                  <ShoppingCartIcon />
-                  <span className="cart-count">{cartItem}</span>
-                </div>
-              </NavLink>
-            </li>
+            {!isLoginPage && (
+              <li className="nav-item">
+                <NavLink
+                  style={({ isActive }) => ({
+                    padding: "0px 5px 20px 5px",
+                    color: isActive ? "#ff6600" : "#ffffff",
+                  })}
+                  className="nav-link"
+                  to={`/cart`}
+                  onClick={handleLinkClick}
+                >
+                  <div className="cart-icon">
+                    <ShoppingCartIcon />
+                    <span className="cart-count">{cartItem}</span>
+                  </div>
+                </NavLink>
+              </li>
+            )}
           </ul>
         </div>
       </div>

@@ -1,11 +1,9 @@
-import React, { lazy, Suspense, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import ModalView from "./ModalView";
 import FilterProduct from "./Product/FilterProduct/FilterProduct";
 import "./Shop.css";
-
-const ShopDetails = lazy(() => import("./ShopDetails/ShopDetails"));
-
+import ShopDetails from "./ShopDetails/ShopDetails";
 function Shop() {
   const [products, setProducts] = useState([]);
   const [open, setOpen] = useState(false);
@@ -38,12 +36,7 @@ function Shop() {
       <div className="shop">
         {products.length > 0 ? (
           products.map((product) => (
-            <Suspense
-              key={product._id}
-              fallback={<div>Loading...please wait</div>}
-            >
-              <ShopDetails product={product} setOpen={setOpen} />
-            </Suspense>
+            <ShopDetails product={product} setOpen={setOpen} />
           ))
         ) : (
           <p>No products available</p>

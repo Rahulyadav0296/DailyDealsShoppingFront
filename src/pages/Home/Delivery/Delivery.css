@@ -34,8 +34,14 @@
 }
 
 @media (max-width: 768px) {
+  .delivery-container {
+    margin: 20px; /* Adjust margin for smaller screens */
+    padding: 10px; /* Adjust padding for smaller screens */
+  }
+
   .delivery-item {
     flex: 1 1 calc(100% - 20px); /* Full width for smaller screens */
+    padding: 15px; /* Reduce padding on smaller screens */
   }
 }
 

@@ -68,3 +68,32 @@
 .error-message {
   color: #ff6347; /* Error message color */
 }
+
+/* Media Queries for Mobile Responsiveness */
+@media (max-width: 600px) {
+  .registration-form {
+    width: 100%;
+    padding: 15px; /* Adjust padding for smaller screens */
+  }
+
+  .registration-form h1 {
+    font-size: 24px; /* Adjust font size for smaller screens */
+  }
+
+  .form-input {
+    grid-template-columns: 1fr; /* Single column layout for mobile */
+  }
+
+  .form-input input {
+    font-size: 14px; /* Adjust font size for smaller screens */
+  }
+
+  .profile-picture-input {
+    grid-column: span 1; /* Ensure profile picture input spans one column */
+  }
+
+  .registration-form button {
+    padding: 12px; /* Adjust button padding for smaller screens */
+    font-size: 14px; /* Adjust font size for smaller screens */
+  }
+}

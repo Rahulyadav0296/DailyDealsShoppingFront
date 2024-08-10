@@ -29,14 +29,16 @@
 }
 
 /* Responsive styles */
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .carousel {
-    max-width: 100%;
+    width: calc(100% - 20px); /* Full width minus margin */
+    margin: 10px auto; /* Margin adjusted for mobile, ensuring some space around */
   }
 
   .carousel-button {
     font-size: 1.5rem;
-    width: 30px;
-    height: 30px;
+    width: 40px; /* Increased size for better touch interaction */
+    height: 40px; /* Increased size for better touch interaction */
+    line-height: 40px; /* Center text vertically */
   }
 }

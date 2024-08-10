@@ -70,6 +70,9 @@
 
 /* Responsive styles */
 @media (max-width: 768px) {
+  .carousel-content {
+    width: 100%;
+  }
   .carousel-caption {
     bottom: 10px;
     left: 10px;
