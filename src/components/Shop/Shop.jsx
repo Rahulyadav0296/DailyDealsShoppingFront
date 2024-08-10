@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 
 import ModalView from "./ModalView";
 import FilterProduct from "./Product/FilterProduct/FilterProduct";
 import "./Shop.css";
-import ShopDetails from "./ShopDetails/ShopDetails";
+
+const ShopDetails = lazy(() => import("./ShopDetails/ShopDetails"));
 
 function Shop() {
   const [products, setProducts] = useState([]);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:5000/products")
+    fetch("https://dailydealsbackend-9.onrender.com/products")
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -19,13 +20,16 @@ function Shop() {
       .catch((err) => console.error(err));
   }, []);
 
-  function handleClose() {
-    setOpen(false);
-  }
+  useEffect(() => {
+    if (open) {
+      const timer = setTimeout(() => {
+        setOpen(false);
+      }, 1000);
 
-  setTimeout(() => {
-    handleClose();
-  }, 1000);
+      // Cleanup timeout on component unmount
+      return () => clearTimeout(timer);
+    }
+  }, [open]);
 
   return (
     <>
@@ -34,19 +38,20 @@ function Shop() {
       <div className="shop">
         {products.length > 0 ? (
           products.map((product) => (
-            <ShopDetails
+            <Suspense
               key={product._id}
-              product={product}
-              setOpen={setOpen}
-            />
+              fallback={<div>Loading...please wait</div>}
+            >
+              <ShopDetails product={product} setOpen={setOpen} />
+            </Suspense>
           ))
         ) : (
-          <p className="no-products">No Products Available....</p>
+          <p>No products available</p>
         )}
         <ModalView
           message="Item added Successfully!"
           open={open}
-          onClose={handleClose}
+          onClose={() => setOpen(false)}
         />
       </div>
     </>

@@ -14,18 +14,21 @@ function ShopDetails({ product, setOpen }) {
     try {
       console.log("Sending request to add product to cart:", productId);
 
-      const response = await fetch("http://localhost:5000/add", {
-        // Correct endpoint
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId: userId,
-          productId: productId,
-          quantity: 1, // Set to a valid quantity
-        }),
-      });
+      const response = await fetch(
+        "https://dailydealsbackend-9.onrender.com/add",
+        {
+          // Correct endpoint
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userId: userId,
+            productId: productId,
+            quantity: 1, // Set to a valid quantity
+          }),
+        }
+      );
 
       console.log("Response from server:", response);
 

@@ -62,7 +62,7 @@ function CartItemsSummary() {
   };
 
   const handleRemove = (productId) => {
-    fetch("http://localhost:5000/remove", {
+    fetch("https://dailydealsbackend-9.onrender.com/remove", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

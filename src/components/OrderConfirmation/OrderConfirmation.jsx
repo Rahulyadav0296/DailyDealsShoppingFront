@@ -161,7 +161,9 @@ const OrderConfirmation = () => {
                   <ItemPrice>{`$ ${item.product.price}`}</ItemPrice>
                 </ItemDetails>
               </ItemContainerImg>
-              <TotalQuantity>{`Total Quantity: ${item.quantity}`}</TotalQuantity>
+              <TotalQuantity>{`Total Quantity: ${item.quantity.toFixed(
+                2
+              )}`}</TotalQuantity>
             </ItemContainer>
           ))}
         </div>

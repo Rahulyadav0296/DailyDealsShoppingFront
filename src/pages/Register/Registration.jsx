@@ -28,7 +28,7 @@ function Registration() {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    fetch("http://localhost:5000/signup", {
+    fetch("https://dailydealsbackend-9.onrender.com/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

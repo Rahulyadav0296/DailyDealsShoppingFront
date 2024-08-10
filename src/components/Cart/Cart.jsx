@@ -42,7 +42,7 @@ function Cart() {
       return;
     }
 
-    fetch(`http://localhost:5000/${userId}`)
+    fetch(`https://dailydealsbackend-9.onrender.com/${userId}`)
       .then((res) => {
         if (!res.ok) {
           dispatch(setMessage("Response is not OK!"));

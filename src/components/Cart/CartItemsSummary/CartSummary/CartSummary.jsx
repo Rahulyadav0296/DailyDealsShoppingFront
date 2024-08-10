@@ -12,7 +12,7 @@ function CartSummary() {
   const dispatch = useDispatch();
   const [message, setMessage] = useState("");
   const handleClearCart = () => {
-    fetch(`http://localhost:5000/clear/${userId}`, {
+    fetch(`https://dailydealsbackend-9.onrender.com/clear/${userId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

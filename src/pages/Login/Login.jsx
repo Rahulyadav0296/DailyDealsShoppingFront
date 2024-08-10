@@ -4,8 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { setToken, setUserId } from "../../utils/authSlice.js";
 import "./Login.css"; // Import the CSS
 function Login() {
-  const [email, setEmail] = useState("rahul123@gmail.com");
-  const [password, setPassword] = useState("123456");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const [message, setMessage] = useState("");
   const userId = useSelector((state) => state.auth.userId);
@@ -14,13 +14,16 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:5000/signin", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      const response = await fetch(
+        "https://dailydealsbackend-9.onrender.com/signin",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        }
+      );
 
       if (!response.ok) {
         const errorText = await response.text();
