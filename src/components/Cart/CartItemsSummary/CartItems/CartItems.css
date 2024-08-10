@@ -1,3 +1,4 @@
+/* General Styles */
 .cart-item {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
@@ -122,13 +123,14 @@
   }
 }
 
+/* Additional Responsive Design for Smaller Screens */
 @media screen and (max-width: 767px) {
   .cart-item {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto auto;
+    flex-direction: column;
     padding: 10px;
     margin-bottom: 10px;
     align-items: center;
+    text-align: center; /* Center-align text for mobile view */
   }
 
   .cart-item-product-div {
@@ -145,7 +147,6 @@
   .cart-item-name {
     font-size: 14px;
     padding: 10px 0;
-    text-align: center;
   }
 
   .cart-item-price-container,

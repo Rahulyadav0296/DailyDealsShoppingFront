@@ -11,76 +11,82 @@ const Container = styled(Box)(({ theme }) => ({
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
-  padding: 20,
-  maxWidth: 800,
-  margin: "50px auto",
+  padding: theme.spacing(2), // Adjusted for mobile
+  maxWidth: "100%", // Ensure full width
+  margin: "20px auto", // Reduced margin for mobile
   textAlign: "center",
   backgroundColor: "#f9f9f9",
   borderRadius: 8,
   boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+  [theme.breakpoints.up("sm")]: {
+    maxWidth: 800,
+    margin: "50px auto",
+    padding: theme.spacing(4),
+  },
 }));
 
 const Title = styled(Typography)(({ theme }) => ({
   color: "#4caf50",
-  fontSize: "2em",
-  marginBottom: 20,
+  fontSize: "1.5em", // Adjusted for mobile
+  marginBottom: theme.spacing(2),
+  [theme.breakpoints.up("sm")]: {
+    fontSize: "2em",
+  },
 }));
 
 const Message = styled(Typography)(({ theme }) => ({
   color: "#555",
-  fontSize: "1.2em",
-  marginBottom: 30,
+  fontSize: "1em", // Adjusted for mobile
+  marginBottom: theme.spacing(3),
+  [theme.breakpoints.up("sm")]: {
+    fontSize: "1.2em",
+  },
 }));
 
 const OrderDetails = styled(Box)(({ theme }) => ({
   width: "100%",
   backgroundColor: "#fff",
-  padding: 20,
+  padding: theme.spacing(2), // Adjusted for mobile
   borderRadius: 8,
   boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-  marginBottom: 20,
+  marginBottom: theme.spacing(2),
+  [theme.breakpoints.up("sm")]: {
+    padding: theme.spacing(3),
+  },
 }));
 
 const Button = styled(MuiButton)(({ theme }) => ({
   backgroundColor: "#4caf50",
   color: "#fff",
-  padding: "15px 30px",
+  padding: "10px 20px", // Adjusted for mobile
   fontSize: "1em",
   borderRadius: 8,
   cursor: "pointer",
   "&:hover": {
     backgroundColor: "#45a049",
   },
+  [theme.breakpoints.up("sm")]: {
+    padding: "15px 30px",
+    fontSize: "1em",
+  },
 }));
 
 const ItemContainer = styled(Box)(({ theme }) => ({
   display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
+  flexDirection: "column", // Stack items on mobile
   borderBottom: "1px solid #ddd",
-  padding: "10px 15px",
+  padding: theme.spacing(1),
   backgroundColor: "#fafafa",
   borderRadius: 8,
   boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
   transition: "background-color 0.3s ease, box-shadow 0.3s ease",
+  marginBottom: theme.spacing(1),
   "&:hover": {
     backgroundColor: "#f1f1f1",
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
   },
-}));
-
-const ItemContainerImg = styled(Box)(({ them }) => ({
-  display: "flex",
-  alignItems: "center",
-  borderBottom: "1px solid #ddd",
-  padding: "10px 15px",
-  backgroundColor: "#fafafa",
-  borderRadius: 8,
-  boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-  transition: "background-color 0.3s ease, box-shadow 0.3s ease",
-  "&:hover": {
-    backgroundColor: "#f1f1f1",
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+  [theme.breakpoints.up("sm")]: {
+    flexDirection: "row", // Align items horizontally on larger screens
   },
 }));
 
@@ -89,14 +95,14 @@ const ItemImage = styled("img")(({ theme }) => ({
   height: "60px",
   objectFit: "cover",
   borderRadius: 8,
-  marginRight: "15px",
+  marginRight: theme.spacing(2),
   border: "1px solid #ddd",
 }));
 
 const ItemDetails = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
-  padding: "5px",
+  padding: theme.spacing(1),
 }));
 
 const ItemName = styled(Typography)(({ theme }) => ({
@@ -117,7 +123,7 @@ const TotalQuantity = styled(Typography)(({ theme }) => ({
   fontWeight: "bold",
   fontSize: "1em",
   color: "#333",
-  marginTop: "20px",
+  marginTop: theme.spacing(2),
 }));
 
 const formatDate = (timestamp) => {
@@ -129,8 +135,6 @@ const formatDate = (timestamp) => {
 
 const OrderConfirmation = () => {
   const cartItemsDetails = useSelector((state) => state.auth.cartItemsDetails);
-  console.log(cartItemsDetails);
-  console.log(cartItemsDetails.items.quantity);
   const { formattedDate, formattedTime } = formatDate(
     cartItemsDetails.createdAt
   );
@@ -149,21 +153,21 @@ const OrderConfirmation = () => {
         <DetailsRows label={"Time:"} value={formattedTime} />
         <DetailsRows
           label={"Total:"}
-          value={`$ ${cartItemsDetails.totalPrice}`}
+          value={`$ ${cartItemsDetails.totalPrice.toFixed(2)}`} // Fixed to 2 decimal places
         />
         <div>
           {cartItemsDetails.items.map((item) => (
             <ItemContainer key={item.product._id}>
-              <ItemContainerImg>
-                <ItemImage src={item.product.image} alt={item.product.name} />
-                <ItemDetails>
-                  <ItemName>{item.product.name}</ItemName>
-                  <ItemPrice>{`$ ${item.product.price}`}</ItemPrice>
-                </ItemDetails>
-              </ItemContainerImg>
+              <ItemImage src={item.product.image} alt={item.product.name} />
+              <ItemDetails>
+                <ItemName>{item.product.name}</ItemName>
+                <ItemPrice>{`$ ${item.product.price.toFixed(2)}`}</ItemPrice>{" "}
+                {/* Fixed to 2 decimal places */}
+              </ItemDetails>
               <TotalQuantity>{`Total Quantity: ${item.quantity.toFixed(
                 2
-              )}`}</TotalQuantity>
+              )}`}</TotalQuantity>{" "}
+              {/* Fixed to 2 decimal places */}
             </ItemContainer>
           ))}
         </div>

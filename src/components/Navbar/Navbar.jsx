@@ -97,6 +97,7 @@ const Navbar = () => {
                   aria-haspopup="true"
                   aria-expanded="false"
                   className="nav-link dropdown-toggle"
+                  onClick={handleLinkClick}
                 >
                   <PersonIcon />
                 </p>

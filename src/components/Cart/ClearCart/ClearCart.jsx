@@ -7,6 +7,12 @@ const CartActions = styled("div")(({ theme }) => ({
   gap: "20px",
   justifyContent: "center",
   marginTop: "20px",
+  [theme.breakpoints.down("sm")]: {
+    // Adjust layout for small screens
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "10px", // Reduced gap for smaller screens
+  },
 }));
 
 const CartButton = styled("button")(({ theme }) => ({
@@ -20,6 +26,8 @@ const CartButton = styled("button")(({ theme }) => ({
   textDecoration: "none",
   display: "inline-block",
   transition: "background-color 0.3s ease",
+  width: "100%", // Ensures buttons take full width of their container
+  maxWidth: "300px", // Ensures buttons don't become too wide
   "&:hover": {
     backgroundColor: theme.palette.primary.dark,
   },

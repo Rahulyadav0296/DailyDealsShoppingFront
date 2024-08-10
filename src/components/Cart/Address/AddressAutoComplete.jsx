@@ -7,12 +7,18 @@ const FormContainer = styled("div")(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   gap: theme.spacing(2),
-  maxWidth: 800,
-  width: 550,
-  margin: 30,
-  padding: theme.spacing(4),
+  maxWidth: "100%", // Adjust for mobile width
+  width: "100%",
+  margin: "20px", // Adjust margin for smaller screens
+  padding: theme.spacing(2),
   boxShadow: theme.shadows[3],
   borderRadius: theme.shape.borderRadius,
+  [theme.breakpoints.up("sm")]: {
+    maxWidth: 800,
+    width: 550,
+    margin: 30,
+    padding: theme.spacing(4),
+  },
 }));
 
 const SuggestionList = styled(List)(({ theme }) => ({
@@ -23,6 +29,9 @@ const SuggestionList = styled(List)(({ theme }) => ({
   width: "100%",
   maxHeight: 200,
   overflowY: "auto",
+  [theme.breakpoints.down("xs")]: {
+    maxHeight: 150, // Adjust maxHeight for smaller screens
+  },
 }));
 
 const SuggestionItem = styled(ListItem)(({ theme }) => ({
@@ -93,17 +102,14 @@ function AddressAutoComplete({ setShowButton }) {
       />
       {suggestions && suggestions.length > 0 && (
         <SuggestionList>
-          {suggestions &&
-            suggestions.map((suggestion, index) => (
-              <SuggestionItem
-                key={index}
-                onClick={() =>
-                  handleSuggestionClick(suggestion.formattedAddress)
-                }
-              >
-                <ListItemText primary={suggestion.formattedAddress} />
-              </SuggestionItem>
-            ))}
+          {suggestions.map((suggestion, index) => (
+            <SuggestionItem
+              key={index}
+              onClick={() => handleSuggestionClick(suggestion.formattedAddress)}
+            >
+              <ListItemText primary={suggestion.formattedAddress} />
+            </SuggestionItem>
+          ))}
         </SuggestionList>
       )}
     </FormContainer>
