@@ -13,7 +13,6 @@ import Login from "./pages/Login/Login";
 import Registration from "./pages/Register/Registration";
 import Root from "./pages/Root";
 import User from "./pages/User/User";
-import { AuthProvider } from "./utils/AutheContext";
 
 const router = createBrowserRouter([
   {
@@ -74,11 +73,7 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return (
-    <AuthProvider>
-      <RouterProvider router={router}></RouterProvider>
-    </AuthProvider>
-  );
+  return <RouterProvider router={router}></RouterProvider>;
 }
 
 export default App;

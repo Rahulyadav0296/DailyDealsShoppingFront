@@ -65,6 +65,10 @@
   margin-left: 5px;
 }
 
+.nav-item {
+  color: white;
+}
+
 @media (max-width: 768px) {
   .navbar-nav {
     flex-direction: column;

@@ -49,7 +49,11 @@ function ShopDetails({ product, setOpen }) {
     navigate(`/products/${id}`);
   };
   const handleBuyNow = () => {
-    navigate("/place-order");
+    if (userId !== null) {
+      navigate("/place-order");
+    } else {
+      navigate("/signin");
+    }
   };
 
   return (
