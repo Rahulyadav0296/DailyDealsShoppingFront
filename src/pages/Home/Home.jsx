@@ -52,9 +52,11 @@ function Home() {
 
   return (
     <>
-      <h1 class="welcome-message">
-        Welcome, <span>{account}</span>!
-      </h1>
+      {userId !== null && (
+        <h1 class="welcome-message">
+          Welcome, <span>{account}</span>!
+        </h1>
+      )}
       <main className="carousel">
         <button className="carousel-button prev" onClick={prevSlide}>
           <i className="fa-solid fa-angle-left"></i>
