@@ -114,6 +114,21 @@
   color: black;
 }
 
+/* styles.css */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  background-color: #ecf0f1; /* Background color matching your theme */
+}
+
+.loading-image {
+  margin-top: 40px;
+  width: 300px; /* Adjust size as needed */
+  height: auto; /* Adjust size as needed */
+}
+
 @media (max-width: 768px) {
   .navbar-nav {
     flex-direction: column;

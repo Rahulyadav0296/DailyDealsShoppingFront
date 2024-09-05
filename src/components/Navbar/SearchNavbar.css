@@ -1,0 +1,71 @@
+.search-form {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  color: #fff; /* You can change this color as per your design */
+  font-size: 20px; /* Adjust size as needed */
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 10px 10px 40px; /* Adds padding on the left for the icon */
+  border: 1px solid #ccc; /* Adjust border color */
+  border-radius: 20px; /* Rounded corners */
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: #007bff; /* Change border color on focus */
+}
+
+.search-input::placeholder {
+  color: #aaa; /* Placeholder color */
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .search-container {
+    max-width: 300px; /* Reduce max-width on smaller screens */
+  }
+
+  .search-icon {
+    font-size: 18px; /* Adjust icon size for smaller screens */
+    left: 8px; /* Adjust icon position */
+  }
+
+  .search-input {
+    padding: 8px 8px 8px 36px; /* Adjust padding for smaller screens */
+    font-size: 14px; /* Smaller font size */
+    border-radius: 15px; /* Adjust border-radius for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .search-container {
+    max-width: 100%; /* Use full width on very small screens */
+  }
+
+  .search-input {
+    padding: 6px 6px 6px 32px; /* Further adjust padding */
+    font-size: 12px; /* Further reduce font size */
+  }
+
+  .search-icon {
+    font-size: 16px; /* Smaller icon */
+  }
+}

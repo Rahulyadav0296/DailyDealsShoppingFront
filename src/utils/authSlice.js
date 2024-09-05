@@ -1,17 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// const [products, setProducts] = useState([]);
 const initialState = {
   userId: null,
   cartItemsDetails: null,
   cartItem: 0,
   message: "",
   token: null,
+  products: [],
+  allProducts: [],
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    setProducts(state, action) {
+      state.products = action.payload;
+      state.allProducts = action.payload;
+    },
+    setAllProducts(state, action) {
+      state.allProducts = action.payload;
+    },
     setUserId(state, action) {
       state.userId = action.payload;
     },
@@ -35,6 +45,8 @@ const authSlice = createSlice({
 
 export const {
   setUserId,
+  setProducts,
+  setAllProducts,
   setCartItemsDetails,
   setCartItem,
   setMessage,

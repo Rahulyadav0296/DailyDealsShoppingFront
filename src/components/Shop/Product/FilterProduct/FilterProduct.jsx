@@ -1,10 +1,14 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setProducts } from "../../../../utils/authSlice";
 import FilterPrice from "./FilterPrice/FilterPrice";
 import "./FilterProduct.css";
 import FilterRating from "./FilterRating.jsx/FilterRating";
 
-function FilterProduct({ setProducts, products }) {
+function FilterProduct() {
+  const products = useSelector((state) => state.auth.products);
   const [price, setPrice] = useState(0);
+  const dispatch = useDispatch();
   const [checked, setChecked] = useState({
     check1: false,
     check2: false,
@@ -18,7 +22,7 @@ function FilterProduct({ setProducts, products }) {
     setTimeout(() => {
       const newProduct = products.filter((prev) => prev.price < price);
       console.log(newProduct);
-      setProducts(newProduct);
+      dispatch(setProducts(newProduct));
     }, 5000);
   };
 
@@ -33,9 +37,9 @@ function FilterProduct({ setProducts, products }) {
       (prev) => prev.rating >= Number(name)
     );
     if (checkedProduct.length === 0) {
-      <p>No Product Available....</p>;
+      <p>Loading...</p>;
     }
-    setProducts(checkedProduct);
+    dispatch(setProducts(checkedProduct));
   };
 
   return (

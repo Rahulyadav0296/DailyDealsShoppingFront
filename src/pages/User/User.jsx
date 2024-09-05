@@ -49,7 +49,7 @@ function User() {
 
   useEffect(() => {
     if (userId) {
-      fetch(`https://dailydealsbackend-9.onrender.com/signup/${userId}`)
+      fetch(`http://localhost:5000/signup/${userId}`)
         .then((res) => {
           if (!res.ok) {
             throw new Error("Response from server is not ok");

@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { lazy, Suspense, useState } from "react";
 import { blogs } from "../../utils/blogs";
 import "./Blog.css";
 import Categories from "./BlogCategory/Categories";
 import Search from "./BlogCategory/Search";
-import PaginationBlog from "./PaginationBlog";
+const PaginationBlog = lazy(() => import("./PaginationBlog"));
 
 const POST_PER_PAGE = 5;
 
@@ -41,7 +41,7 @@ function Blog() {
 
   return (
     <div className="blog-container">
-      <div>
+      <div className="blog-container-filter">
         <Search
           searchBlog={searchBlog}
           onChange={handleChange}
@@ -49,17 +49,29 @@ function Blog() {
         />
         <Categories setFilterBlogs={setFilterBlogs} />
       </div>
-      <PaginationBlog
-        currentBlogs={currentBlogs}
-        currentPage={currentPage}
-        totalPages={totalPages}
-        handleNext={() => {
-          handlePageChange(currentPage + 1);
-        }}
-        handlePrev={() => {
-          handlePageChange(currentPage - 1);
-        }}
-      />
+      <Suspense
+        fallback={
+          <div className="loading-container">
+            <img
+              src="https://i.giphy.com/jAYUbVXgESSti.webp"
+              alt="Loading..."
+              className="loading-image"
+            />
+          </div>
+        }
+      >
+        <PaginationBlog
+          currentBlogs={currentBlogs}
+          currentPage={currentPage}
+          totalPages={totalPages}
+          handleNext={() => {
+            handlePageChange(currentPage + 1);
+          }}
+          handlePrev={() => {
+            handlePageChange(currentPage - 1);
+          }}
+        />
+      </Suspense>
     </div>
   );
 }

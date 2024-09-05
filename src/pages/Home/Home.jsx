@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { images } from "../../utils/homeImage";
 import CarouselContent from "./CarouselContent/CarouselContent";
 import Delivery from "./Delivery/Delivery";
@@ -9,6 +10,8 @@ import Testimonials from "./Testimonials/Testimonials";
 
 function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const userId = useSelector((state) => state.auth.userId);
+  const [account, setAccount] = useState("");
 
   const prevSlide = () => {
     setCurrentIndex((prev) => (prev > 0 ? prev - 1 : images.length - 1));
@@ -25,8 +28,33 @@ function Home() {
     return () => clearInterval(interval);
   }, [currentIndex]);
 
+  useEffect(() => {
+    if (userId) {
+      fetch(`http://localhost:5000/signup/${userId}`)
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error("Response from server is not ok");
+          }
+          return res.json();
+        })
+        .then((data) => {
+          const fullname = data.firstName + " " + data.lastName;
+          console.log("User Details are: ", fullname);
+          setAccount(fullname);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [userId]);
+
+  console.log(userId);
+
   return (
     <>
+      <h1 class="welcome-message">
+        Welcome, <span>{account}</span>!
+      </h1>
       <main className="carousel">
         <button className="carousel-button prev" onClick={prevSlide}>
           <i className="fa-solid fa-angle-left"></i>

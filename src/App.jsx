@@ -1,79 +1,282 @@
+import React, { Suspense } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Blog from "./components/Blog/Blog";
-import Address from "./components/Cart/Address/Address";
-import Cart from "./components/Cart/Cart";
-import PlaceOrder from "./components/Cart/PlaceOrder/PlaceOrder";
-import Contact from "./components/Contact/Contact";
-import OrderConfirmation from "./components/OrderConfirmation/OrderConfirmation";
-import Product from "./components/Shop/Product/Product";
-import Shop from "./components/Shop/Shop";
-import ErrorPage from "./pages/Error/ErrorPage";
-import Home from "./pages/Home/Home";
-import Login from "./pages/Login/Login";
-import Registration from "./pages/Register/Registration";
-import Root from "./pages/Root";
-import User from "./pages/User/User";
+
+// Lazy load components
+const Blog = React.lazy(() => import("./components/Blog/Blog"));
+const Address = React.lazy(() => import("./components/Cart/Address/Address"));
+const Cart = React.lazy(() => import("./components/Cart/Cart"));
+const PlaceOrder = React.lazy(() =>
+  import("./components/Cart/PlaceOrder/PlaceOrder")
+);
+const Contact = React.lazy(() => import("./components/Contact/Contact"));
+const OrderConfirmation = React.lazy(() =>
+  import("./components/OrderConfirmation/OrderConfirmation")
+);
+const Product = React.lazy(() => import("./components/Shop/Product/Product"));
+const Shop = React.lazy(() => import("./components/Shop/Shop"));
+const ErrorPage = React.lazy(() => import("./pages/Error/ErrorPage"));
+const Home = React.lazy(() => import("./pages/Home/Home"));
+const Login = React.lazy(() => import("./pages/Login/Login"));
+const Registration = React.lazy(() => import("./pages/Register/Registration"));
+const Root = React.lazy(() => import("./pages/Root"));
+const User = React.lazy(() => import("./pages/User/User"));
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root />,
-    errorElement: <ErrorPage />,
+    element: (
+      <Suspense
+        fallback={
+          <div className="loading-container">
+            <img
+              src="https://i.giphy.com/jAYUbVXgESSti.webp"
+              alt="Loading..."
+              className="loading-image"
+            />
+          </div>
+        }
+      >
+        <Root />
+      </Suspense>
+    ),
+    errorElement: (
+      <Suspense
+        fallback={
+          <div className="loading-container">
+            <img
+              src="https://i.giphy.com/jAYUbVXgESSti.webp"
+              alt="Loading Error Page..."
+              className="loading-image"
+            />
+          </div>
+        }
+      >
+        <ErrorPage />
+      </Suspense>
+    ),
     children: [
       {
         path: "",
-        element: <Home />,
+        element: (
+          <Suspense
+            fallback={
+              <div className="loading-container">
+                <img
+                  src="https://i.giphy.com/jAYUbVXgESSti.webp"
+                  alt="Loading Home..."
+                  className="loading-image"
+                />
+              </div>
+            }
+          >
+            <Home />
+          </Suspense>
+        ),
       },
       {
         path: "signin",
-        element: <Login />,
+        element: (
+          <Suspense
+            fallback={
+              <div className="loading-container">
+                <img
+                  src="https://i.giphy.com/jAYUbVXgESSti.webp"
+                  alt="Loading Login..."
+                  className="loading-image"
+                />
+              </div>
+            }
+          >
+            <Login />
+          </Suspense>
+        ),
       },
       {
         path: "signup",
-        element: <Registration />,
+        element: (
+          <Suspense
+            fallback={
+              <div className="loading-container">
+                <img
+                  src="https://i.giphy.com/jAYUbVXgESSti.webp"
+                  alt="Loading Registration..."
+                  className="loading-image"
+                />
+              </div>
+            }
+          >
+            <Registration />
+          </Suspense>
+        ),
       },
       {
         path: "signup/:id",
-        element: <User />,
+        element: (
+          <Suspense
+            fallback={
+              <div className="loading-container">
+                <img
+                  src="https://i.giphy.com/jAYUbVXgESSti.webp"
+                  alt="Loading User..."
+                  className="loading-image"
+                />
+              </div>
+            }
+          >
+            <User />
+          </Suspense>
+        ),
       },
       {
         path: "products",
-        element: <Shop />,
+        element: (
+          <Suspense
+            fallback={
+              <div className="loading-container">
+                <img
+                  src="https://i.giphy.com/jAYUbVXgESSti.webp"
+                  alt="Loading Shop..."
+                  className="loading-image"
+                />
+              </div>
+            }
+          >
+            <Shop />
+          </Suspense>
+        ),
       },
       {
         path: "products/:id",
-        element: <Product />,
+        element: (
+          <Suspense
+            fallback={
+              <div className="loading-container">
+                <img
+                  src="https://i.giphy.com/jAYUbVXgESSti.webp"
+                  alt="Loading Product..."
+                  className="loading-image"
+                />
+              </div>
+            }
+          >
+            <Product />
+          </Suspense>
+        ),
       },
       {
         path: "contact",
-        element: <Contact />,
+        element: (
+          <Suspense
+            fallback={
+              <div className="loading-container">
+                <img
+                  src="https://i.giphy.com/jAYUbVXgESSti.webp"
+                  alt="Loading Contact..."
+                  className="loading-image"
+                />
+              </div>
+            }
+          >
+            <Contact />
+          </Suspense>
+        ),
       },
       {
         path: "cart",
-        element: <Cart />,
+        element: (
+          <Suspense
+            fallback={
+              <div className="loading-container">
+                <img
+                  src="https://i.giphy.com/jAYUbVXgESSti.webp"
+                  alt="Loading Cart..."
+                  className="loading-image"
+                />
+              </div>
+            }
+          >
+            <Cart />
+          </Suspense>
+        ),
       },
       {
         path: "blog",
-        element: <Blog />,
+        element: (
+          <Suspense
+            fallback={
+              <div className="loading-container">
+                <img
+                  src="https://i.giphy.com/jAYUbVXgESSti.webp"
+                  alt="Loading Blog..."
+                  className="loading-image"
+                />
+              </div>
+            }
+          >
+            <Blog />
+          </Suspense>
+        ),
       },
       {
         path: "place-order",
-        element: <Address />,
+        element: (
+          <Suspense
+            fallback={
+              <div className="loading-container">
+                <img
+                  src="https://i.giphy.com/jAYUbVXgESSti.webp"
+                  alt="Loading Address..."
+                  className="loading-image"
+                />
+              </div>
+            }
+          >
+            <Address />
+          </Suspense>
+        ),
       },
       {
         path: "payment-order",
-        element: <PlaceOrder />,
+        element: (
+          <Suspense
+            fallback={
+              <div className="loading-container">
+                <img
+                  src="https://i.giphy.com/jAYUbVXgESSti.webp"
+                  alt="Loading Place Order..."
+                  className="loading-image"
+                />
+              </div>
+            }
+          >
+            <PlaceOrder />
+          </Suspense>
+        ),
       },
       {
         path: "order-confirm",
-        element: <OrderConfirmation />,
+        element: (
+          <Suspense
+            fallback={
+              <div className="loading-container">
+                <img
+                  src="https://i.giphy.com/jAYUbVXgESSti.webp"
+                  alt="Loading Order Confirmation..."
+                  className="loading-image"
+                />
+              </div>
+            }
+          >
+            <OrderConfirmation />
+          </Suspense>
+        ),
       },
     ],
   },
 ]);
 
 function App() {
-  return <RouterProvider router={router}></RouterProvider>;
+  return <RouterProvider router={router} />;
 }
 
 export default App;

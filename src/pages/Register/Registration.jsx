@@ -28,7 +28,7 @@ function Registration() {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    fetch("https://dailydealsbackend-9.onrender.com/signup", {
+    fetch("http://localhost:5000/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -38,6 +38,7 @@ function Registration() {
       .then((res) => res.json())
       .then((data) => {
         if (data.error) {
+          console.log(data.error);
           setError(data.error);
         } else {
           console.log(data.message);
@@ -55,7 +56,7 @@ function Registration() {
   return (
     <form className="registration-form" onSubmit={handleRegister}>
       <h1>Sign Up</h1>
-      {error && <p className="error-message">{error}</p>}
+
       <div className="form-input">
         <Input
           name="firstName"
@@ -102,10 +103,11 @@ function Registration() {
           className="form-input profile-picture-input"
         />
       </div>
+      {error && <p className="error-message">{error}</p>}
       <button type="submit" className="submit-button">
         Register
       </button>
-      {message && <p>{message}</p>}
+      {message && <p> {message}</p>}
 
       <p style={{ color: "#fff" }}>
         Already have an account?{" "}

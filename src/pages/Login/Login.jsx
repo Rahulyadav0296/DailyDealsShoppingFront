@@ -14,23 +14,20 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(
-        "https://dailydealsbackend-9.onrender.com/signin",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
-        }
-      );
+      const response = await fetch("http://localhost:5000/signin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
       if (!response.ok) {
         const errorText = await response.text();
         if (!userId) {
-          dispatch(setMessage("User Does Not Exists!"));
+          setMessage("User Does Not Exists!");
         } else {
-          dispatch(setMessage("Email or password is wrong!"));
+          setMessage("Email or password is wrong!");
         }
 
         throw new Error(
@@ -45,8 +42,8 @@ function Login() {
       // navigate("/");
       navigate("/");
     } catch (error) {
-      console.log(error.message);
       console.error("Error:", error);
+      setMessage(error.message);
     }
   };
 

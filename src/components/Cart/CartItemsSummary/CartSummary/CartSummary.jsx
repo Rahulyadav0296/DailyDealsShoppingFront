@@ -11,8 +11,9 @@ function CartSummary() {
   const userId = useSelector((state) => state.auth.userId);
   const dispatch = useDispatch();
   const [message, setMessage] = useState("");
+
   const handleClearCart = () => {
-    fetch(`https://dailydealsbackend-9.onrender.com/clear/${userId}`, {
+    fetch(`http://localhost:5000/clear/${userId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -28,8 +29,9 @@ function CartSummary() {
         return res.json();
       })
       .then((data) => {
-        dispatch(setCartItemsDetails(data));
-        dispatch(setCartItem(0));
+        console.log(data);
+        dispatch(setCartItemsDetails(data.cartItemsDetails || {}));
+        dispatch(setCartItem(data.cartItemsDetails?.totalItems || 0));
       })
       .catch((err) => {
         setMessage("Something is wrong in clearing the cart!");

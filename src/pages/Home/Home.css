@@ -6,6 +6,28 @@
   margin: 30px;
 }
 
+/* Styling for the welcome message */
+.welcome-message {
+  font-size: 2.5rem; /* Larger font size for impact */
+  color: #333; /* Dark gray text for readability */
+  background-color: transparent; /* White background for contrast */
+  padding: 20px 40px; /* Space around the text */
+  border-radius: 12px; /* Rounded corners for smooth design */
+  text-align: center; /* Center text within the element */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth transition for hover effects */
+}
+
+/* Highlight the dynamic account name */
+.welcome-message span {
+  color: #09ac83; /* Blue color for the account name */
+  font-weight: bold; /* Make the account name stand out */
+}
+
+/* Hover effect */
+.welcome-message:hover {
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+
 .carousel-button {
   position: absolute;
   top: 50%;

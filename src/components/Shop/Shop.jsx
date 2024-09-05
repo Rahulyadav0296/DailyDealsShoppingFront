@@ -1,22 +1,26 @@
 import React, { useEffect, useState } from "react";
 
+import { useDispatch, useSelector } from "react-redux";
+import { setProducts } from "../../utils/authSlice";
 import ModalView from "./ModalView";
 import FilterProduct from "./Product/FilterProduct/FilterProduct";
 import "./Shop.css";
 import ShopDetails from "./ShopDetails/ShopDetails";
+
 function Shop() {
-  const [products, setProducts] = useState([]);
   const [open, setOpen] = useState(false);
+  const allProducts = useSelector((state) => state.auth.allProducts);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch("https://dailydealsbackend-9.onrender.com/products")
+    fetch("http://localhost:5000/products")
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        setProducts(data);
+        dispatch(setProducts(data));
       })
       .catch((err) => console.error(err));
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (open) {
@@ -32,11 +36,15 @@ function Shop() {
   return (
     <>
       {/* Filter condition */}
-      <FilterProduct setProducts={setProducts} products={products} />
+      <FilterProduct />
       <div className="shop">
-        {products.length > 0 ? (
-          products.map((product) => (
-            <ShopDetails product={product} setOpen={setOpen} />
+        {allProducts && allProducts.length > 0 ? (
+          allProducts.map((product) => (
+            <ShopDetails
+              product={product}
+              setOpen={setOpen}
+              key={product._id}
+            />
           ))
         ) : (
           <p>No products available</p>

@@ -54,19 +54,35 @@
 .cart-icon {
   display: flex;
   align-items: center;
+  background-color: transparent;
+  color: black;
 }
 
 .cart-icon .cart-count {
-  background-color: #ff6600; /* Orange background for cart count */
+  background-color: red; /* Orange background for cart count */
   color: #ffffff; /* White text color for cart count */
   border-radius: 50%;
   padding: 2px 8px;
-  font-size: 0.9rem;
+  font-size: 0.6rem;
   margin-left: 5px;
 }
 
 .nav-item {
   color: white;
+}
+
+.nav-link-logout {
+  color: white;
+  font-weight: bold;
+  background-color: transparent;
+  border: none;
+}
+
+.nav-link {
+  border-radius: 25px;
+  padding: 5px;
+  font-weight: bold;
+  margin-left: 15px;
 }
 
 @media (max-width: 768px) {

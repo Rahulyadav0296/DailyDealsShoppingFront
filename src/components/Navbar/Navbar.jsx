@@ -9,7 +9,9 @@ import "./Navbar.css";
 const Navbar = () => {
   const [isCollapsed, setIsCollapsed] = useState(true);
   const handleToggle = () => setIsCollapsed(!isCollapsed);
-  const handleLinkClick = () => setIsCollapsed(true);
+  const handleLinkClick = () => {
+    setIsCollapsed(true);
+  };
 
   return (
     <nav
@@ -39,7 +41,7 @@ const Navbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div
-          className={`collapse navbar-collapse ${isCollapsed ? "" : "show"}`}
+          className={`collapse navbar-collapse ${isCollapsed && "show"}`}
           id="navbarNav"
         >
           <ul className="navbar-nav me-auto mb-2 mb-md-0">

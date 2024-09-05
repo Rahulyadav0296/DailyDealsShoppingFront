@@ -1,4 +1,9 @@
 /* Pagination controls styling */
+
+.pagination-blog {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
 .pagination-controls {
   display: flex;
   flex: wrap;
@@ -34,8 +39,12 @@
 }
 
 /* Mobile responsive styles */
-@media (max-width: 768px) {
+@media (max-width: 1153px) {
+  .pagination-blog {
+    display: inline;
+  }
   .pagination-controls {
+    width: 80%;
     flex-wrap: wrap; /* Allow wrapping if needed */
     gap: 10px; /* Adjust spacing between buttons */
   }
@@ -52,7 +61,11 @@
 }
 
 @media (max-width: 480px) {
+  .pagination-blog {
+    display: inline;
+  }
   .pagination-controls {
+    width: 80%;
     flex-direction: column; /* Stack buttons vertically */
     align-items: center; /* Center-align buttons */
   }

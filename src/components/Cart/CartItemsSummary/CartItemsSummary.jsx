@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setCartItem,
@@ -11,8 +11,6 @@ import "./CartItemsSummary.css";
 import CartSummary from "./CartSummary/CartSummary";
 
 function CartItemsSummary() {
-  // const { setCartItem, setCartItemsDetails, setMessage, userId } =
-  //   useContext(AuthContext);
   const cartItemsDetails = useSelector((state) => state.auth.cartItemsDetails);
   const userId = useSelector((state) => state.auth.userId);
   const dispatch = useDispatch();
@@ -61,60 +59,77 @@ function CartItemsSummary() {
     );
   };
 
-  const handleRemove = (productId) => {
-    fetch("https://dailydealsbackend-9.onrender.com/remove", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userId: userId,
-        productId: productId,
-      }),
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Response is not OK!");
-        }
-        return res.json();
+  const handleRemove = useCallback(
+    (productId) => {
+      if (!userId || !productId) {
+        console.error("Missing userId or productId");
+        dispatch(setMessage("Invalid user or product data!"));
+        return;
+      }
+
+      fetch("http://localhost:5000/remove", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: userId,
+          productId: productId,
+        }),
       })
-      .then((data) => {
-        const totalQuantity = data.items.reduce(
-          (sum, item) => sum + item.quantity,
-          0
-        );
-        console.log(data);
-        dispatch(setCartItem(totalQuantity));
-        dispatch(setCartItemsDetails(data));
-      })
-      .catch((err) => {
-        dispatch(setMessage("Something is wrong in removing the cart!"));
-        console.log(err);
-      });
-  };
+        .then((res) => {
+          if (!res.ok) {
+            return res.json().then((error) => {
+              throw new Error(error.message || "Server error");
+            });
+          }
+          return res.json();
+        })
+        .then((data) => {
+          console.log("The Items after deletion are: ", data);
+
+          const totalQuantity = data.items.reduce(
+            (sum, item) => sum + item.quantity,
+            0
+          );
+          dispatch(setCartItem(totalQuantity));
+
+          if (data.items.length === 0) {
+            dispatch(setCartItemsDetails({ items: [], totalPrice: 0 }));
+          } else {
+            dispatch(setCartItemsDetails(data));
+          }
+        })
+        .catch((err) => {
+          dispatch(setMessage("Something went wrong while removing the item!"));
+          console.error(err);
+        });
+    },
+    [userId, dispatch]
+  );
   return (
     <>
       <div className="cart-content-details">
         <div className="cart-content">
           <div className="cart-items">
             <CartItemTitle />
-            {cartItemsDetails.items.map((item) => {
-              const product = item.product;
-              return (
-                <CartItems
-                  key={item._id}
-                  item={item}
-                  product={product}
-                  handleDecrement={() => {
-                    handleDecrement(item);
-                  }}
-                  handleIncrement={() => {
-                    handleIncrement(item);
-                  }}
-                  handleRemove={() => handleRemove(product._id)}
-                />
-              );
-            })}
+            {cartItemsDetails.items.length > 0 ? (
+              cartItemsDetails.items.map((item, index) => {
+                const product = item.product;
+                return (
+                  <CartItems
+                    key={`${item._id}-${index}`}
+                    item={item}
+                    product={product}
+                    handleDecrement={() => handleDecrement(item)}
+                    handleIncrement={() => handleIncrement(item)}
+                    handleRemove={() => handleRemove(product._id)}
+                  />
+                );
+              })
+            ) : (
+              <p>No items in the cart.</p>
+            )}
           </div>
           <CartSummary />
         </div>

@@ -17,12 +17,6 @@ const Div = styled("div")(({ theme }) => ({
   boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
 }));
 
-const Message = styled("p")(({ theme }) => ({
-  color: theme.palette.error.main,
-  fontWeight: "bold",
-  marginTop: "20px",
-}));
-
 const Title = styled("h1")(({ theme }) => ({
   fontSize: "2rem",
   margin: "20px 0",
@@ -32,7 +26,6 @@ const Title = styled("h1")(({ theme }) => ({
 function Cart() {
   const userId = useSelector((state) => state.auth.userId);
   const cartItemsDetails = useSelector((state) => state.auth.cartItemsDetails);
-  const message = useSelector((state) => state.auth.message);
 
   const dispatch = useDispatch();
 
@@ -42,7 +35,7 @@ function Cart() {
       return;
     }
 
-    fetch(`https://dailydealsbackend-9.onrender.com/${userId}`)
+    fetch(`http://localhost:5000/${userId}`)
       .then((res) => {
         if (!res.ok) {
           dispatch(setMessage("Response is not OK!"));
@@ -59,9 +52,10 @@ function Cart() {
       });
   }, [userId]);
 
-  if (!cartItemsDetails) {
+  if (!cartItemsDetails || !cartItemsDetails.items) {
     return <EmptyCart />;
   }
+  console.log("the cart items details", cartItemsDetails);
 
   return (
     <Div>

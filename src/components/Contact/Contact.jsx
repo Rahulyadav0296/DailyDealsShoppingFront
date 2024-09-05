@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Map from "../Map/Map";
 import "./Contact.css";
 import Form from "./Form";
 import Location from "./Location";
@@ -44,7 +45,7 @@ function Contact() {
       setResult(true);
       setWarning(true);
     } else {
-      fetch("https://dailydealsbackend-9.onrender.com/contact", {
+      fetch("http://localhost:5000/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -70,23 +71,29 @@ function Contact() {
   return (
     <>
       <h1 style={{ textAlign: "center", margin: "40px" }}>Get in Touch</h1>
-      <div className="contact-me-container">
-        <Location />
+      <div className="contact-me-container-summary">
+        <div className="contact-me-container">
+          <Location />
+          {/* Contact Form */}
+          <div className="contact-form">
+            <Form
+              handleSubmit={handleSubmit}
+              user={user}
+              handleUser={handleUser}
+              warning={warning}
+            />
 
-        {/* Contact Form */}
-        <div className="contact-form">
-          <Form
-            handleSubmit={handleSubmit}
-            user={user}
-            handleUser={handleUser}
-            warning={warning}
-          />
-
-          {/* Modal */}
-          {open && (
-            <Modals handleClose={handleClose} result={result} output={output} />
-          )}
+            {/* Modal */}
+            {open && (
+              <Modals
+                handleClose={handleClose}
+                result={result}
+                output={output}
+              />
+            )}
+          </div>
         </div>
+        <Map />
       </div>
     </>
   );

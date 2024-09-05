@@ -66,7 +66,15 @@
 }
 
 .error-message {
-  color: #ff6347; /* Error message color */
+  box-shadow: none;
+  border-radius: 25px;
+  align-content: center;
+  text-align: center;
+  justify-content: center;
+  padding: 10px;
+  font-weight: bold;
+  background-color: rgba(52, 3, 3, 0.078);
+  color: rgb(255, 4, 4); /* Error message color */
 }
 
 /* Media Queries for Mobile Responsiveness */

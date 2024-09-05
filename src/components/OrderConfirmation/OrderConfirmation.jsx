@@ -161,7 +161,7 @@ const OrderConfirmation = () => {
               <ItemImage src={item.product.image} alt={item.product.name} />
               <ItemDetails>
                 <ItemName>{item.product.name}</ItemName>
-                <ItemPrice>{`$ ${item.product.price.toFixed(2)}`}</ItemPrice>{" "}
+                <ItemPrice>{`$ ${item.product.price?.toFixed(2)}`}</ItemPrice>{" "}
                 {/* Fixed to 2 decimal places */}
               </ItemDetails>
               <TotalQuantity>{`Total Quantity: ${item.quantity.toFixed(

@@ -6,7 +6,8 @@ function ListItem({ children, setIsCollapsed, to }) {
     <li className="nav-item">
       <NavLink
         style={({ isActive }) => ({
-          color: isActive ? "greenyellow" : "white",
+          color: isActive ? "black" : "white",
+          backgroundColor: isActive ? "white" : "",
         })}
         className="nav-link"
         to={to}

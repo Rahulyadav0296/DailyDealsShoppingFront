@@ -53,16 +53,13 @@ function UserEdit({
 
   const handleSave = async () => {
     try {
-      const response = await fetch(
-        `https://dailydealsbackend-9.onrender.com/signup/${userId}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(user),
-        }
-      );
+      const response = await fetch(`http://localhost:5000/signup/${userId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
 
       const data = await response.json();
       console.log(data);

@@ -1,15 +1,17 @@
 import Rating from "@mui/material/Rating"; // Ensure you have this component available and installed from Material-UI
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import "./Product.css";
 
 function Product() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const userId = useSelector((state) => state.auth.userId);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`https://dailydealsbackend-9.onrender.com/products/${id}`)
+    fetch(`http://localhost:5000/products/${id}`)
       .then((res) => {
         if (!res.ok) {
           throw new Error(`HTTP error! Status: ${res.status}`);
@@ -27,7 +29,11 @@ function Product() {
   }
 
   const handleAddToCart = () => {
-    navigate("/place-order");
+    if (userId !== null) {
+      navigate("/place-order");
+    } else {
+      navigate("/signin");
+    }
   };
 
   return (

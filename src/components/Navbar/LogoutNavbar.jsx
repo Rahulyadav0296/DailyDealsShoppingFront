@@ -12,7 +12,7 @@ function LogoutNavbar({ handleLinkClick, setIsCollapsed }) {
 
   useEffect(() => {
     if (userId) {
-      fetch(`https://dailydealsbackend-9.onrender.com/signup/${userId}`)
+      fetch(`http://localhost:5000/signup/${userId}`)
         .then((res) => {
           if (!res.ok) {
             throw new Error("Response from server is not ok");
@@ -45,11 +45,18 @@ function LogoutNavbar({ handleLinkClick, setIsCollapsed }) {
           to={`/signup/${userId}`}
           onClick={handleLinkClick}
         >
-          <img src={account.profilePicture} alt={account.firstName} />
+          <img
+            src={
+              account.profilePicture === ""
+                ? "https://images.pexels.com/photos/1496647/pexels-photo-1496647.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                : account.profilePicture
+            }
+            alt={account.firstName}
+          />
         </NavLink>
       </li>
       <li className="nav-item">
-        <button onClick={handleLogout} className="nav-link">
+        <button onClick={handleLogout} className="nav-link-logout">
           Logout
         </button>
       </li>

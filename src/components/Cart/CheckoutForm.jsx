@@ -3,6 +3,7 @@ import CreditCardIcon from "@mui/icons-material/CreditCard";
 import { styled } from "@mui/material/styles";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { setCartItemsDetails } from "../../utils/authSlice";
 import PaymentOrder from "./PaymentDetails/PaymentOrder";
 
 const Form = styled("form")(({ theme }) => ({
@@ -68,6 +69,7 @@ const PaymentForm = () => {
   const handleCash = () => setCardPayment(false);
   const handleOrderPlace = (e) => {
     e.preventDefault();
+    setCartItemsDetails("");
     navigate("/order-confirm");
   };
 

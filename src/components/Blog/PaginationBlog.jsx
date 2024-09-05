@@ -12,12 +12,18 @@ function PaginationBlog({
   handleNext,
 }) {
   return (
-    <div className="pagination-blog">
-      {currentBlogs.map((blog) => (
-        <PaginationControl blog={blog} key={blog.id} />
-      ))}
+    <div className="pagination-details">
+      <div className="pagination-blog">
+        {currentBlogs.map((blog) => (
+          <PaginationControl blog={blog} key={blog.id} />
+        ))}
+      </div>
       <div className="pagination-controls">
-        <button className="pagination-button" onClick={handlePrev}>
+        <button
+          className="pagination-button"
+          onClick={handlePrev}
+          disabled={currentPage === 1}
+        >
           <i className="fa-solid fa-angle-left"></i>
         </button>
         <span className="pagination-info">

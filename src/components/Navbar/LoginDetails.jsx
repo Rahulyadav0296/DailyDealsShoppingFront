@@ -5,12 +5,14 @@ import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import CartNavbar from "./CartNavbar";
 import LogoutNavbar from "./LogoutNavbar";
+import SearchNavbar from "./SearchNavbar";
 
 function LoginDetails({ handleLinkClick, setIsCollapsed }) {
   const token = useSelector((state) => state.auth.token);
 
   return (
     <ul className="navbar-nav">
+      <SearchNavbar />
       {token === null ? (
         <li className="nav-item">
           <NavLink

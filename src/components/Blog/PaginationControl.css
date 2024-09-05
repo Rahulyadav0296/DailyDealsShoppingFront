@@ -4,7 +4,7 @@
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  width: 500px;
+  width: 600px;
   margin: 20px;
   overflow-y: auto;
   transition: transform 0.3s, box-shadow 0.3s;

@@ -14,21 +14,18 @@ function ShopDetails({ product, setOpen }) {
     try {
       console.log("Sending request to add product to cart:", productId);
 
-      const response = await fetch(
-        "https://dailydealsbackend-9.onrender.com/add",
-        {
-          // Correct endpoint
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            userId: userId,
-            productId: productId,
-            quantity: 1, // Set to a valid quantity
-          }),
-        }
-      );
+      const response = await fetch("http://localhost:5000/add", {
+        // Correct endpoint
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: userId,
+          productId: productId,
+          quantity: 1, // Set to a valid quantity
+        }),
+      });
 
       console.log("Response from server:", response);
 
@@ -69,8 +66,12 @@ function ShopDetails({ product, setOpen }) {
         />
         <h5 className="shop__product-name">{product.name}</h5>
         <p className="shop__product-type">{product.type}</p>
-        <p className="shop__product-rating">Rating: {product.rating}/5</p>
-        <p className="shop__product-price">${product.price}</p>
+        <p className="shop__product-rating">
+          <strong>Rating:</strong> {product.rating}/5
+        </p>
+        <p className="shop__product-price">
+          <strong>$</strong> {product.price}
+        </p>
       </div>
       <div className="shop-buttons">
         <button className="button-75" onClick={() => handleCart(product._id)}>
