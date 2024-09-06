@@ -26,7 +26,7 @@ const Title = styled("h1")(({ theme }) => ({
 function Cart() {
   const userId = useSelector((state) => state.auth.userId);
   const cartItemsDetails = useSelector((state) => state.auth.cartItemsDetails);
-
+  const cartItem = useSelector((state) => state.auth.cartItem);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -44,6 +44,7 @@ function Cart() {
         return res.json();
       })
       .then((data) => {
+        console.log(data.totalQuantity);
         dispatch(setCartItemsDetails(data));
       })
       .catch((err) => {

@@ -16,6 +16,7 @@ function CartItemsSummary() {
   const dispatch = useDispatch();
 
   const handleDecrement = (item) => {
+    console.log("Cart increment Items are:", item);
     if (item.quantity > 1) {
       const updatedItem = { ...item, quantity: item.quantity - 1 };
       dispatch(
@@ -49,12 +50,17 @@ function CartItemsSummary() {
       (total, item) => total + item.quantity * item.product.price,
       0
     );
+    const updateTotalQuantity = updatedItems.reduce(
+      (quantity, item) => quantity + item.quantity,
+      0
+    );
 
     dispatch(
       setCartItemsDetails({
         ...cartItemsDetails,
         items: updatedItems,
         totalPrice: updatedTotalPrice,
+        totalQuantity: updateTotalQuantity,
       })
     );
   };
@@ -92,12 +98,26 @@ function CartItemsSummary() {
             (sum, item) => sum + item.quantity,
             0
           );
+
           dispatch(setCartItem(totalQuantity));
 
           if (data.items.length === 0) {
-            dispatch(setCartItemsDetails({ items: [], totalPrice: 0 }));
+            dispatch(
+              setCartItemsDetails({
+                items: [],
+                totalPrice: 0,
+                totalQuantity: 0,
+              })
+            );
           } else {
-            dispatch(setCartItemsDetails(data));
+            // Update the cart with the remaining items
+            dispatch(
+              setCartItemsDetails({
+                items: data.items,
+                totalPrice: data.totalPrice, // Ensure the backend sends totalPrice
+                totalQuantity: totalQuantity,
+              })
+            );
           }
         })
         .catch((err) => {
@@ -116,6 +136,11 @@ function CartItemsSummary() {
             {cartItemsDetails.items.length > 0 ? (
               cartItemsDetails.items.map((item, index) => {
                 const product = item.product;
+
+                if (!product || !product.name) {
+                  return null;
+                }
+
                 return (
                   <CartItems
                     key={`${item._id}-${index}`}

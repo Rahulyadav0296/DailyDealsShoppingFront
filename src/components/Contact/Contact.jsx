@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Map from "../Map/Map";
 import "./Contact.css";
 import Form from "./Form";
 import Location from "./Location";
@@ -74,6 +73,7 @@ function Contact() {
       <div className="contact-me-container-summary">
         <div className="contact-me-container">
           <Location />
+
           {/* Contact Form */}
           <div className="contact-form">
             <Form
@@ -93,7 +93,6 @@ function Contact() {
             )}
           </div>
         </div>
-        <Map />
       </div>
     </>
   );

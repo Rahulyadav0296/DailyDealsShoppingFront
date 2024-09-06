@@ -1,7 +1,7 @@
 .search-form {
   display: flex;
   justify-content: center;
-  margin-top: 10px;
+  margin-top: 0px;
 }
 
 .search-container {
@@ -23,7 +23,8 @@
   width: 100%;
   padding: 10px 10px 10px 40px; /* Adds padding on the left for the icon */
   border: 1px solid #ccc; /* Adjust border color */
-  border-radius: 20px; /* Rounded corners */
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   font-size: 16px;
   outline: none;
   transition: border-color 0.3s ease;
@@ -37,9 +38,50 @@
   color: #aaa; /* Placeholder color */
 }
 
+/* Suggestions container for the search results */
+.search-container > div {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  z-index: 100;
+}
+
+/* Individual suggestion item */
+.search-container > div > div {
+  padding: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+  background-color: #fff;
+  border-bottom: 1px solid #eaeaea;
+}
+
+/* Hover effect for suggestions */
+.search-container > div > div:hover {
+  background-color: #f1f1f1;
+}
+
+/* Hide the suggestions container when there are no results */
+.search-container > div:empty {
+  display: none;
+}
+
+/* Style for the suggestion text (optional) */
+.search-container > div > div p {
+  margin: 0;
+}
+
 /* Mobile Responsive Styles */
 @media (max-width: 768px) {
   .search-container {
+    margin-bottom: 10px;
     max-width: 300px; /* Reduce max-width on smaller screens */
   }
 

@@ -52,11 +52,10 @@ function Home() {
 
   return (
     <>
-      {userId !== null && (
-        <h1 class="welcome-message">
-          Welcome, <span>{account}</span>!
-        </h1>
-      )}
+      <h1 className="welcome-message">
+        Welcome,{" "}
+        <span>{userId !== null ? account : "to Daily Deals"} &#128525;</span>
+      </h1>
       <main className="carousel">
         <button className="carousel-button prev" onClick={prevSlide}>
           <i className="fa-solid fa-angle-left"></i>

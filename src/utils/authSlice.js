@@ -3,7 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 // const [products, setProducts] = useState([]);
 const initialState = {
   userId: null,
-  cartItemsDetails: null,
+  cartItemsDetails: {
+    items: [],
+    totalQuantity: 0,
+    totalPrice: 0,
+  },
+  orders: null,
   cartItem: 0,
   message: "",
   token: null,
@@ -26,7 +31,15 @@ const authSlice = createSlice({
       state.userId = action.payload;
     },
     setCartItemsDetails(state, action) {
-      state.cartItemsDetails = action.payload;
+      // Ensure that the payload contains the necessary information
+      state.cartItemsDetails = {
+        items: action.payload.items || [],
+        totalQuantity: action.payload.totalQuantity || 0,
+        totalPrice: action.payload.totalPrice || 0,
+      };
+    },
+    setOrders(state, action) {
+      state.orders = action.payload;
     },
     setCartItem(state, action) {
       state.cartItem = action.payload;
@@ -48,6 +61,7 @@ export const {
   setProducts,
   setAllProducts,
   setCartItemsDetails,
+  setOrders,
   setCartItem,
   setMessage,
   clearMessage,

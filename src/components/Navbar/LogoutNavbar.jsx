@@ -5,10 +5,10 @@ import { setToken } from "../../utils/authSlice";
 import "./LogoutNavbar.css";
 
 function LogoutNavbar({ handleLinkClick, setIsCollapsed }) {
+  const [account, setAccount] = useState("");
   const userId = useSelector((state) => state.auth.userId);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [account, setAccount] = useState("");
 
   useEffect(() => {
     if (userId) {
@@ -20,7 +20,6 @@ function LogoutNavbar({ handleLinkClick, setIsCollapsed }) {
           return res.json();
         })
         .then((data) => {
-          console.log("User Details are: ", data);
           setAccount(data);
         })
         .catch((err) => {
@@ -34,16 +33,16 @@ function LogoutNavbar({ handleLinkClick, setIsCollapsed }) {
     setIsCollapsed(true);
     navigate("/signin");
   };
+
   return (
     <ul className="navbar-nav">
-      <li className="nav-item">
-        <NavLink
-          style={({ isActive }) => ({
-            color: isActive ? "#ff6600" : "#000000",
-          })}
-          className="nav-link"
-          to={`/signup/${userId}`}
-          onClick={handleLinkClick}
+      <li className="dropdown" style={{ margin: "0px 15px" }}>
+        <div
+          className="dropdown-toggle"
+          id="dropdownMenuButton"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
         >
           <img
             src={
@@ -51,10 +50,38 @@ function LogoutNavbar({ handleLinkClick, setIsCollapsed }) {
                 ? "https://images.pexels.com/photos/1496647/pexels-photo-1496647.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 : account.profilePicture
             }
-            alt={account.firstName}
+            alt={account.firstName || "User"}
+            className="profile-image"
           />
-        </NavLink>
+        </div>
+        <div
+          style={{ backgroundColor: "white" }}
+          className="dropdown-menu"
+          aria-labelledby="dropdownMenuButton"
+        >
+          <NavLink
+            style={({ isActive }) => ({
+              color: isActive ? "#ff6600" : "#000000",
+            })}
+            className="nav-link"
+            to={`/signup/${userId}`}
+            onClick={handleLinkClick}
+          >
+            My Account
+          </NavLink>
+          <NavLink
+            style={({ isActive }) => ({
+              color: isActive ? "#ff6600" : "#000000",
+            })}
+            className="nav-link"
+            to={"/order-summary"}
+            onClick={handleLinkClick}
+          >
+            Order Summary
+          </NavLink>
+        </div>
       </li>
+
       <li className="nav-item">
         <button onClick={handleLogout} className="nav-link-logout">
           Logout

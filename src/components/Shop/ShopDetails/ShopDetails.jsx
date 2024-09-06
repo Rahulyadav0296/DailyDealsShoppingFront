@@ -36,7 +36,7 @@ function ShopDetails({ product, setOpen }) {
 
       const data = await response.json();
       console.log("Data received from server:", data);
-      dispatch(setCartItem(cartItem + 1));
+      dispatch(setCartItem(data.totalQuantity));
       setOpen(true);
     } catch (error) {
       console.error("Error handling cart:", error);
