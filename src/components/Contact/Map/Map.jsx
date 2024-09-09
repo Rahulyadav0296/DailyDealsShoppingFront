@@ -1,33 +1,36 @@
-import * as maptilersdk from "@maptiler/sdk";
-import "@maptiler/sdk/dist/maptiler-sdk.css";
-import React, { useEffect, useRef } from "react";
-import "./map.css";
+import "leaflet/dist/leaflet.css";
+import React from "react";
+import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import { locations } from "../../../utils/locations";
 
-export default function Map() {
-  const mapContainer = useRef(null);
-  const map = useRef(null);
-  const india = { lng: 79.9454, lat: 23.1815 };
-  const zoom = 14;
-  maptilersdk.config.apiKey = "ZZQNP9HxV1ao4LCbAaKJ";
-
-  useEffect(() => {
-    if (map.current) return; // stops map from intializing more than once
-
-    map.current = new maptilersdk.Map({
-      container: mapContainer.current,
-      style: maptilersdk.MapStyle.STREETS,
-      center: [india.lng, india.lat],
-      zoom: zoom,
-    });
-
-    new maptilersdk.Marker({ color: "#FF0000" })
-      .setLngLat([79.9454, 23.1815])
-      .addTo(map.current);
-  }, [india.lng, india.lat, zoom]);
-
+function Map() {
+  const centerPosition = [28.6139, 77.209];
+  const currentDate = new Date();
+  const currentDay = currentDate.getFullYear();
   return (
-    <div className="map-wrap">
-      <div ref={mapContainer} className="map" />
-    </div>
+    <MapContainer
+      center={centerPosition}
+      zoom={13}
+      style={{ height: "500px", width: "100%" }}
+    >
+      <TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      />
+      {locations.map((loc, idx) => (
+        <Marker key={idx} position={[loc.lat, loc.lng]}>
+          <Popup>
+            <strong>{loc.name}</strong> <br />
+            Opening Date: <span>{currentDay}</span>
+            <br />
+            Production Rate: {(Math.random() * 100).toFixed(2)} units/hour{" "}
+            <br />
+            Operational Efficiency: {(Math.random() * 100).toFixed(2)}%
+          </Popup>
+        </Marker>
+      ))}
+    </MapContainer>
   );
 }
+
+export default Map;

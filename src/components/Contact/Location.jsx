@@ -1,5 +1,4 @@
 import EmailIcon from "@mui/icons-material/Email";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PhoneIcon from "@mui/icons-material/Phone";
 import React from "react";
 import Map from "./Map/Map";
@@ -9,14 +8,7 @@ function Location() {
     <div className="contact-me-info">
       {/* Location */}
       <div className="contact-me-info-item">
-        <div className="mb-6">
-          <LocationOnIcon />
-          <h2>Location</h2>
-          <p>
-            House Number 43, Vard Number 02, Sharda Nagar, Gadasarai, Dindori,
-            Madhya Pradesh, 481882
-          </p>
-        </div>
+        <Map />
       </div>
 
       {/* Phone */}
@@ -36,8 +28,6 @@ function Location() {
           <p>rahulyadav0296@gmail.com</p>
         </div>
       </div>
-
-      <Map />
     </div>
   );
 }

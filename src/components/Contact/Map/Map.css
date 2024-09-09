@@ -1,9 +1,9 @@
 /* Wrapper for the map container */
 .map-wrap {
   position: relative;
-  margin: 50px auto;
+  margin: 20px 0px;
   width: 100%;
-  height: calc(100vh - 77px); /* height of the screen minus the heading */
+  height: calc(80vh - 77px); /* height of the screen minus the heading */
   border-radius: 12px; /* Rounded corners for a polished look */
   overflow: hidden; /* Ensure the map doesn’t overflow its container */
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */

@@ -8,7 +8,7 @@ function FilterRating({ checked, handleCheck, name }) {
       <input
         type="checkbox"
         name={name}
-        value={checked.check3}
+        value={checked}
         onChange={handleCheck}
       />
       <label htmlFor={name}>
