@@ -3,7 +3,6 @@ import "./PaginationControl.css";
 
 function PaginationControl({ blog }) {
   const [commnetDetails, setCommentDetails] = useState(false);
-  console.log(blog);
 
   return (
     <div className="blog-card">

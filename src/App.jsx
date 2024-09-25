@@ -1,6 +1,7 @@
 import React from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import OrderSummary from "./components/OrderSummary/OrderSummary";
+import RateReview from "./components/OrderSummary/RateReview/RateReview";
 import SuspensenItems from "./pages/SuspenseItems/SuspensenItems";
 
 // Lazy load components
@@ -62,7 +63,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "signup/:id",
+        path: "users/:id",
         element: (
           <SuspensenItems>
             <User />
@@ -82,6 +83,14 @@ const router = createBrowserRouter([
         element: (
           <SuspensenItems>
             <Product />
+          </SuspensenItems>
+        ),
+      },
+      {
+        path: "/products/reviews/:id",
+        element: (
+          <SuspensenItems>
+            <RateReview />
           </SuspensenItems>
         ),
       },

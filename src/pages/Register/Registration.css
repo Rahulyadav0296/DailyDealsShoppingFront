@@ -77,6 +77,16 @@
   color: rgb(255, 4, 4); /* Error message color */
 }
 
+.form-input-select {
+  background-color: transparent;
+  border: none;
+  color: white;
+  border-bottom: 1px solid #fff;
+}
+
+.form-input-select option {
+  color: black;
+}
 /* Media Queries for Mobile Responsiveness */
 @media (max-width: 600px) {
   .registration-form {

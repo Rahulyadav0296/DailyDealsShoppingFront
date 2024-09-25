@@ -1,0 +1,126 @@
+/* General styles for the RateReview component */
+.rate-review-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: "Arial", sans-serif;
+}
+
+.rate-review-title,
+.review-title {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.stars-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.star {
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.review-container {
+  margin-bottom: 1.5rem;
+}
+
+.review-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.review-label {
+  font-size: 1rem;
+  color: #555;
+}
+
+.review-textarea {
+  min-height: 80px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.review-input {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.submit-button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background-color: #ff6600;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #ff5500;
+}
+
+.response-message {
+  text-align: center;
+  margin-top: 10px;
+  color: green;
+  font-size: 1rem;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .rate-review-container {
+    padding: 15px;
+  }
+
+  .rate-review-title,
+  .review-title {
+    font-size: 1.3rem;
+  }
+
+  .review-textarea,
+  .review-input {
+    font-size: 0.9rem;
+  }
+
+  .submit-button {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .rate-review-container {
+    padding: 10px;
+  }
+
+  .rate-review-title,
+  .review-title {
+    font-size: 1.1rem;
+  }
+
+  .review-textarea,
+  .review-input {
+    font-size: 0.8rem;
+  }
+
+  .submit-button {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+}

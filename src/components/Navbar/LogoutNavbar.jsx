@@ -2,37 +2,30 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { setToken } from "../../utils/authSlice";
+import useFetch from "../Hooks/useFetch";
 import "./LogoutNavbar.css";
 
 function LogoutNavbar({ handleLinkClick, setIsCollapsed }) {
-  const [account, setAccount] = useState("");
+  const [account, setAccount] = useState(null);
   const userId = useSelector((state) => state.auth.userId);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (userId) {
-      fetch(`http://localhost:5000/signup/${userId}`)
-        .then((res) => {
-          if (!res.ok) {
-            throw new Error("Response from server is not ok");
-          }
-          return res.json();
-        })
-        .then((data) => {
-          setAccount(data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }, [userId]);
+  const { results } = useFetch({
+    url: "http://localhost:5000/users",
+    id: userId,
+  });
 
   const handleLogout = () => {
     dispatch(setToken(null));
     setIsCollapsed(true);
     navigate("/signin");
   };
+
+  useEffect(() => {
+    if (results) {
+      setAccount(results);
+    }
+  }, [results]);
 
   return (
     <ul className="navbar-nav">
@@ -46,11 +39,11 @@ function LogoutNavbar({ handleLinkClick, setIsCollapsed }) {
         >
           <img
             src={
-              account.profilePicture === ""
-                ? "https://images.pexels.com/photos/1496647/pexels-photo-1496647.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                : account.profilePicture
+              account && account.profilePicture
+                ? account.profilePicture
+                : "https://images.pexels.com/photos/1496647/pexels-photo-1496647.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
             }
-            alt={account.firstName || "User"}
+            alt={account ? account.firstName : "User"}
             className="profile-image"
           />
         </div>
@@ -64,7 +57,7 @@ function LogoutNavbar({ handleLinkClick, setIsCollapsed }) {
               color: isActive ? "#ff6600" : "#000000",
             })}
             className="nav-link"
-            to={`/signup/${userId}`}
+            to={`/users/${userId}`}
             onClick={handleLinkClick}
           >
             My Account

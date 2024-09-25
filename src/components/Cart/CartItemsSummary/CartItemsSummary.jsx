@@ -5,6 +5,7 @@ import {
   setCartItemsDetails,
   setMessage,
 } from "../../../utils/authSlice";
+import usePostRequest from "../../Hooks/usePostRequest";
 import CartItemTitle from "./CartItemTitle/CartItemTitle";
 import CartItems from "./CartItems/CartItems";
 import "./CartItemsSummary.css";
@@ -13,7 +14,9 @@ import CartSummary from "./CartSummary/CartSummary";
 function CartItemsSummary() {
   const cartItemsDetails = useSelector((state) => state.auth.cartItemsDetails);
   const userId = useSelector((state) => state.auth.userId);
+  const token = useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
+  const { postRequest } = usePostRequest();
 
   const handleDecrement = (item) => {
     console.log("Cart increment Items are:", item);
@@ -66,64 +69,46 @@ function CartItemsSummary() {
   };
 
   const handleRemove = useCallback(
-    (productId) => {
+    async (productId) => {
       if (!userId || !productId) {
         console.error("Missing userId or productId");
         dispatch(setMessage("Invalid user or product data!"));
         return;
       }
 
-      fetch("http://localhost:5000/remove", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      const data = await postRequest(
+        "http://localhost:5000/remove",
+        {
           userId: userId,
           productId: productId,
-        }),
-      })
-        .then((res) => {
-          if (!res.ok) {
-            return res.json().then((error) => {
-              throw new Error(error.message || "Server error");
-            });
-          }
-          return res.json();
-        })
-        .then((data) => {
-          console.log("The Items after deletion are: ", data);
+        },
+        token
+      );
+      const totalQuantity = data.items.reduce(
+        (sum, item) => sum + item.quantity,
+        0
+      );
 
-          const totalQuantity = data.items.reduce(
-            (sum, item) => sum + item.quantity,
-            0
-          );
+      dispatch(setCartItem(totalQuantity));
 
-          dispatch(setCartItem(totalQuantity));
-
-          if (data.items.length === 0) {
-            dispatch(
-              setCartItemsDetails({
-                items: [],
-                totalPrice: 0,
-                totalQuantity: 0,
-              })
-            );
-          } else {
-            // Update the cart with the remaining items
-            dispatch(
-              setCartItemsDetails({
-                items: data.items,
-                totalPrice: data.totalPrice, // Ensure the backend sends totalPrice
-                totalQuantity: totalQuantity,
-              })
-            );
-          }
-        })
-        .catch((err) => {
-          dispatch(setMessage("Something went wrong while removing the item!"));
-          console.error(err);
-        });
+      if (data.items.length === 0) {
+        dispatch(
+          setCartItemsDetails({
+            items: [],
+            totalPrice: 0,
+            totalQuantity: 0,
+          })
+        );
+      } else {
+        // Update the cart with the remaining items
+        dispatch(
+          setCartItemsDetails({
+            items: data.items,
+            totalPrice: data.totalPrice, // Ensure the backend sends totalPrice
+            totalQuantity: totalQuantity,
+          })
+        );
+      }
     },
     [userId, dispatch]
   );

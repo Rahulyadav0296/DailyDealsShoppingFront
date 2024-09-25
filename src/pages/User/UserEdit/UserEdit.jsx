@@ -42,13 +42,7 @@ const SaveButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-function UserEdit({
-  setMessage,
-  setUser,
-  user,
-  setEditableUser,
-  editableUser,
-}) {
+function UserEdit({ setUser, user, setEditableUser, editableUser }) {
   const userId = useSelector((state) => state.auth.userId);
 
   const handleSave = async () => {
@@ -67,7 +61,6 @@ function UserEdit({
       setEditableUser(true);
     } catch (err) {
       console.error(err);
-      setMessage(err.message);
     }
   };
 

@@ -1,9 +1,10 @@
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { Box, Button as MuiButton, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { v4 as uuid4 } from "uuid";
 import DetailsRows from "./DetailsRows/DetailsRows";
 
 const Container = styled(Box)(({ theme }) => ({
@@ -126,18 +127,28 @@ const TotalQuantity = styled(Typography)(({ theme }) => ({
   marginTop: theme.spacing(2),
 }));
 
-const formatDate = (timestamp) => {
-  const date = new Date(timestamp);
+const formatDate = () => {
+  const date = new Date();
   const formattedDate = date.toLocaleDateString();
   const formattedTime = date.toLocaleTimeString();
   return { formattedDate, formattedTime };
 };
 
 const OrderConfirmation = () => {
+  const navigate = useNavigate();
+  const token = useSelector((state) => state.auth.token);
   const cartItemsDetails = useSelector((state) => state.auth.cartItemsDetails);
   const { formattedDate, formattedTime } = formatDate(
     cartItemsDetails.createdAt
   );
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/signin");
+    }
+  }, [token]);
+
+  const uuid = uuid4();
 
   return (
     <Container>
@@ -148,7 +159,7 @@ const OrderConfirmation = () => {
         processed.
       </Message>
       <OrderDetails>
-        <DetailsRows label={"Order Number:"} value={cartItemsDetails._id} />
+        <DetailsRows label={"Order Number:"} value={uuid} />
         <DetailsRows label={"Date:"} value={formattedDate} />
         <DetailsRows label={"Time:"} value={formattedTime} />
         <DetailsRows
@@ -172,11 +183,24 @@ const OrderConfirmation = () => {
           ))}
         </div>
       </OrderDetails>
-      <Button>
-        <Link to="/products" style={{ color: "white" }}>
-          Continue Shopping
-        </Link>
-      </Button>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          gap: "20px",
+        }}
+      >
+        <Button style={{ flex: 1 }}>
+          <Link to="/products" style={{ color: "white" }}>
+            Continue Shopping
+          </Link>
+        </Button>
+        <Button style={{ flex: 1 }}>
+          <Link to="/order-summary" style={{ color: "white" }}>
+            Order Summary
+          </Link>
+        </Button>
+      </div>
     </Container>
   );
 };

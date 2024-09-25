@@ -6,7 +6,6 @@ import "./PlaceOrder.css";
 const stripePromise = loadStripe(
   import.meta.env.VITE_APP_STRIPE_PUBLISHABLE_KEY
 ); // Replace with your actual Stripe publishable key
-console.log(stripePromise);
 
 function PlaceOrder() {
   return (

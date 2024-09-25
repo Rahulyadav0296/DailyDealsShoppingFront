@@ -12,32 +12,35 @@ function CartSummary() {
   const dispatch = useDispatch();
   const [message, setMessage] = useState("");
 
-  const handleClearCart = () => {
-    fetch(`http://localhost:5000/clear/${userId}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userId: userId,
-      }),
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Response is not OK!");
-        }
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
-        dispatch(setCartItemsDetails(data.cartItemsDetails || {}));
-        dispatch(setCartItem(data.cartItemsDetails?.totalItems || 0));
-      })
-      .catch((err) => {
-        setMessage("Something is wrong in clearing the cart!");
-        console.log(err);
+  const handleClearCart = async () => {
+    if (!userId) {
+      setMessage("User ID is required to clear the cart!");
+      return;
+    }
+
+    try {
+      const res = await fetch(`http://localhost:5000/clear/${userId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
+
+      if (!res.ok) {
+        const errorData = await res.json(); // Get error details from the response
+        throw new Error(errorData.message || "Failed to clear the cart.");
+      }
+
+      const data = await res.json();
+      console.log(data);
+      dispatch(setCartItemsDetails(data.cartItemsDetails || {}));
+      dispatch(setCartItem(data.cartItemsDetails?.totalItems || 0));
+    } catch (err) {
+      setMessage("Something went wrong while clearing the cart!");
+      console.error(err);
+    }
   };
+
   return (
     <div className="cart-summary">
       <h6>Order Details</h6>

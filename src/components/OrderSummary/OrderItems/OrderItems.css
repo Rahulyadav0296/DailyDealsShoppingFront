@@ -1,0 +1,80 @@
+/* Container for each order item */
+.order-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  border-bottom: 1px solid #e0e0e0;
+  margin: 10px 0;
+  background-color: #f9f9f9;
+}
+
+/* Styling for the product image */
+.order-item-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Container for the item details (name and description) */
+.order-item-details {
+  flex-grow: 1;
+  padding: 0 15px;
+}
+
+/* Product name styling */
+.order-item-name {
+  font-size: 1.2rem;
+  color: #333;
+  margin: 0 0 5px 0;
+}
+
+/* Product description styling */
+.order-item-description {
+  font-size: 0.9rem;
+  color: #777;
+  margin: 0;
+}
+
+/* Product price styling */
+.order-item-price {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #ff6600;
+  margin: 0;
+}
+
+/* === Mobile Responsive Styles === */
+@media (max-width: 768px) {
+  /* Stack items vertically on mobile */
+  .order-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Adjust the image size for mobile */
+  .order-item-image {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+  }
+
+  /* Adjust padding for mobile */
+  .order-item-details {
+    padding: 0 0 10px 0;
+  }
+
+  /* Reduce font size for mobile */
+  .order-item-name {
+    font-size: 1.1rem;
+  }
+
+  .order-item-description {
+    font-size: 0.85rem;
+  }
+
+  .order-item-price {
+    font-size: 1rem;
+  }
+}

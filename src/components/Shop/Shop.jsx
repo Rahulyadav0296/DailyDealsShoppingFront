@@ -16,7 +16,6 @@ function Shop() {
     fetch("http://localhost:5000/products")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         dispatch(setProducts(data));
       })
       .catch((err) => console.error(err));

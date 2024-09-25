@@ -1,7 +1,8 @@
 import { styled } from "@mui/material/styles";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setCartItemsDetails, setMessage } from "../../utils/authSlice";
+import { setCartItemsDetails } from "../../utils/authSlice";
+import useFetch from "../Hooks/useFetch";
 import CartItemsSummary from "./CartItemsSummary/CartItemsSummary";
 import EmptyCart from "./EmptyCart/EmptyCart";
 
@@ -26,32 +27,17 @@ const Title = styled("h1")(({ theme }) => ({
 function Cart() {
   const userId = useSelector((state) => state.auth.userId);
   const cartItemsDetails = useSelector((state) => state.auth.cartItemsDetails);
-  const cartItem = useSelector((state) => state.auth.cartItem);
   const dispatch = useDispatch();
+  const { results, message } = useFetch({
+    url: "http://localhost:5000",
+    id: userId,
+  });
 
   useEffect(() => {
-    if (!userId) {
-      dispatch(setMessage("User id is missing"));
-      return;
+    if (results) {
+      dispatch(setCartItemsDetails(results));
     }
-
-    fetch(`http://localhost:5000/${userId}`)
-      .then((res) => {
-        if (!res.ok) {
-          dispatch(setMessage("Response is not OK!"));
-          throw new Error("Response is not OK");
-        }
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data.totalQuantity);
-        dispatch(setCartItemsDetails(data));
-      })
-      .catch((err) => {
-        dispatch(setMessage("The Cart Item is Missing!"));
-        console.log(err);
-      });
-  }, [userId]);
+  }, [results]);
 
   if (!cartItemsDetails || !cartItemsDetails.items) {
     return <EmptyCart />;

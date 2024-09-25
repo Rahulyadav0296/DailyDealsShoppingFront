@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// const [products, setProducts] = useState([]);
 const initialState = {
   userId: null,
   cartItemsDetails: {

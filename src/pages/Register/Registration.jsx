@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import usePostRequest from "../../components/Hooks/usePostRequest";
 import Input from "./Input";
 import "./Registration.css";
 
@@ -12,11 +14,12 @@ function Registration() {
     password: "",
     contactNumber: "",
     profilePicture: "",
+    role: "user",
   };
   const [user, setUser] = useState(initialState);
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { postRequest, message, loading } = usePostRequest();
+  const token = useSelector((state) => state.auth.token);
 
   const handleUser = (e) => {
     const { name, value } = e.target;
@@ -26,31 +29,20 @@ function Registration() {
     }));
   };
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-    fetch("http://localhost:5000/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.error) {
-          console.log(data.error);
-          setError(data.error);
-        } else {
-          console.log(data.message);
-          setMessage(data.message);
-          setUser(initialState);
-          navigate("/signin");
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        setError("An error occurred during registration.");
-      });
+    try {
+      const data = await postRequest(
+        "http://localhost:5000/signup",
+        user,
+        token
+      );
+      console.log("Data after resistration is: ", data);
+      setUser(initialState);
+      navigate("/signin");
+    } catch (error) {
+      console.error("Error during Registration: ", error);
+    }
   };
 
   return (
@@ -102,8 +94,11 @@ function Registration() {
           placeholder="Profile Picture URL"
           className="form-input profile-picture-input"
         />
+        <select name="role" onChange={handleUser} className="form-input-select">
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
       </div>
-      {error && <p className="error-message">{error}</p>}
       <button type="submit" className="submit-button">
         Register
       </button>

@@ -1,18 +1,35 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import useFetch from "../../components/Hooks/useFetch";
 import { images } from "../../utils/homeImage";
 import CarouselContent from "./CarouselContent/CarouselContent";
 import Delivery from "./Delivery/Delivery";
 import Fashion from "./Fashion/Fashion";
 import "./Home.css"; // Create and import a CSS file for styling
 import LatestNews from "./LatestNews/LatestNews";
-import Testimonials from "./Testimonials/Testimonials";
+import TestimonialsCarousel from "./Testimonials/Testimonials";
 
 function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const userId = useSelector((state) => state.auth.userId);
   const [account, setAccount] = useState("");
+  const { results, message } = useFetch({
+    url: "http://localhost:5000/users",
+    id: userId,
+  });
 
+  useEffect(() => {
+    let isMounted = true; // track if the component is mounted
+
+    if (results && isMounted) {
+      const fullname = `${results.firstName} ${results.lastName}`;
+      setAccount(fullname);
+    }
+
+    return () => {
+      isMounted = false; // clean up the component unmount
+    };
+  }, [results]);
   // we are preventing the re-execution of the code on every render and its totally depends on teh image.length
   const prevSlide = useCallback(() => {
     setCurrentIndex((prev) => (prev > 0 ? prev - 1 : images.length - 1));
@@ -22,42 +39,12 @@ function Home() {
     setCurrentIndex((prev) => (prev < images.length - 1 ? prev + 1 : 0));
   }, [images.length]);
 
-  // whenever the image.length is changes here then its re-render again
-  // and preventing the un-necessary  reset of the interval each time currentIndex Changes
-
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
     }, 5000); // Change slide every 5 seconds
     return () => clearInterval(interval);
   }, [images.length]); // depends on image.length rather than current Index
-
-  useEffect(() => {
-    let isMounted = true; // track if the component is mounted
-    if (userId) {
-      fetch(`http://localhost:5000/signup/${userId}`)
-        .then((res) => {
-          if (!res.ok) {
-            throw new Error("Response from server is not ok");
-          }
-          return res.json();
-        })
-        .then((data) => {
-          if (isMounted) {
-            const fullname = data.firstName + " " + data.lastName;
-            console.log("User Details are: ", fullname);
-            setAccount(fullname);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-
-    return () => {
-      isMounted = false; // clean up the component unmount
-    };
-  }, [userId]);
 
   return (
     <>
@@ -75,9 +62,10 @@ function Home() {
         </button>
       </main>
       <Fashion />
-      <Testimonials />
+      <TestimonialsCarousel />
       <LatestNews />
       <Delivery />
+      {message && <p>{message}</p>}
     </>
   );
 }
