@@ -51,7 +51,7 @@ function CreateBlog({ setShowCreate }) {
 
     try {
       const response = await postRequest(
-        "http://localhost:5000/blog",
+        "https://dailydealsbackend-13.onrender.com/blog",
         blogData,
         token
       );
@@ -78,13 +78,16 @@ function CreateBlog({ setShowCreate }) {
   const handleSave = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:5000/blog/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json", // Set the content type to JSON
-        },
-        body: JSON.stringify(blogs),
-      });
+      const response = await fetch(
+        `https://dailydealsbackend-13.onrender.com/blog/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json", // Set the content type to JSON
+          },
+          body: JSON.stringify(blogs),
+        }
+      );
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }

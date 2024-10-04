@@ -19,12 +19,15 @@ function CartSummary() {
     }
 
     try {
-      const res = await fetch(`http://localhost:5000/clear/${userId}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const res = await fetch(
+        `https://dailydealsbackend-26.onrender.com/clear/${userId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (!res.ok) {
         const errorData = await res.json(); // Get error details from the response

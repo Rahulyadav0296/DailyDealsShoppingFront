@@ -13,9 +13,10 @@ function Shop() {
   const [open, setOpen] = useState(false);
   const allProducts = useSelector((state) => state.auth.allProducts);
   const dispatch = useDispatch();
+  const userId = useSelector((state) => state.auth.userId);
   const { results, message } = useFetch({
     url: "https://dailydealsbackend-26.onrender.com/products",
-    id: null,
+    id: userId,
   });
   const token = useSelector((state) => state.auth.token);
   const navigate = useNavigate();
@@ -56,14 +57,13 @@ function Shop() {
             />
           ))
         ) : (
-          <p>Loading...</p>
+          <p>{message}</p>
         )}
         <ModalView
           message="Item added Successfully!"
           open={open}
           onClose={() => setOpen(false)}
         />
-        {message && <p>{message}</p>}
       </div>
     </>
   );
