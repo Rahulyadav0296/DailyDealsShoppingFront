@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function CustomerPolicy() {
   return (
     <div className="col-6 col-md-2 mb-3">
-      <h5>Cutomer Policy</h5>
+      <h5>Customer Policy</h5>
       <ul className="nav flex-column">
         <li className="nav-item mb-2">
           <Link to="#" className="nav-link p-0 text-body-secondary">

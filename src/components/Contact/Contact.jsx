@@ -44,7 +44,7 @@ function Contact() {
       setResult(true);
       setWarning(true);
     } else {
-      fetch("https://dailydealsbackend-26.onrender.com/contact", {
+      fetch("https://dailydealsbackend-18.onrender.com/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

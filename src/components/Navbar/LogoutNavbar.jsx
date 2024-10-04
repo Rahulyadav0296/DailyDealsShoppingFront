@@ -11,7 +11,7 @@ function LogoutNavbar({ handleLinkClick, setIsCollapsed }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { results } = useFetch({
-    url: "https://dailydealsbackend-26.onrender.com/users",
+    url: "https://dailydealsbackend-18.onrender.com/users",
     id: userId,
   });
 

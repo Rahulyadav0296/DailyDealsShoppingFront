@@ -48,7 +48,7 @@ function UserEdit({ setUser, user, setEditableUser, editableUser }) {
   const handleSave = async () => {
     try {
       const response = await fetch(
-        `https://dailydealsbackend-26.onrender.com/signup/${userId}`,
+        `https://dailydealsbackend-18.onrender.com/signup/${userId}`,
         {
           method: "PUT",
           headers: {

@@ -15,7 +15,7 @@ function Login() {
     e.preventDefault();
     try {
       const data = await postRequest(
-        "https://dailydealsbackend-26.onrender.com/signin",
+        "https://dailydealsbackend-18.onrender.com/signin",
         {
           email,
           password,

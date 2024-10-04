@@ -79,7 +79,7 @@ function CreateBlog({ setShowCreate }) {
     e.preventDefault();
     try {
       const response = await fetch(
-        `https://dailydealsbackend-13.onrender.com/blog/${id}`,
+        `https://dailydealsbackend-18.onrender.com/blog/${id}`,
         {
           method: "PUT",
           headers: {

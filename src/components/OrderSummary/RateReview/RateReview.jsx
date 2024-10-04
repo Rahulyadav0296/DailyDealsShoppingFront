@@ -33,7 +33,7 @@ function RateReview() {
     e.preventDefault();
     try {
       const data = await postRequest(
-        `https://dailydealsbackend-13.onrender.com/products/reviews/${id}`, // Directly use product._id
+        `https://dailydealsbackend-18.onrender.com/products/reviews/${id}`, // Directly use product._id
         {
           rating: rating,
           comments: products.comment,

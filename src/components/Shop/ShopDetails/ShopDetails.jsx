@@ -13,7 +13,7 @@ function ShopDetails({ product, setOpen }) {
       console.log("Sending request to add product to cart:", productId);
 
       const response = await fetch(
-        "https://dailydealsbackend-26.onrender.com/add",
+        "https://dailydealsbackend-18.onrender.com/add",
         {
           // Correct endpoint
           method: "POST",

@@ -11,7 +11,7 @@ function Product() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`https://dailydealsbackend-26.onrender.com/products/${id}`)
+    fetch(`https://dailydealsbackend-18.onrender.com/products/${id}`)
       .then((res) => {
         if (!res.ok) {
           throw new Error(`HTTP error! Status: ${res.status}`);

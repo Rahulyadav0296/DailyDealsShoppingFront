@@ -20,7 +20,7 @@ function CartSummary() {
 
     try {
       const res = await fetch(
-        `https://dailydealsbackend-26.onrender.com/clear/${userId}`,
+        `https://dailydealsbackend-18.onrender.com/clear/${userId}`,
         {
           method: "DELETE",
           headers: {

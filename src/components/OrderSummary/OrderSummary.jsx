@@ -12,7 +12,7 @@ function OrderSummary() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { results, message } = useFetch({
-    url: "https://dailydealsbackend-26.onrender.com/",
+    url: "https://dailydealsbackend-18.onrender.com/",
     id: userId,
   });
 

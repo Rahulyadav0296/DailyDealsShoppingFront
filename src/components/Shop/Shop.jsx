@@ -14,7 +14,7 @@ function Shop() {
   const allProducts = useSelector((state) => state.auth.allProducts);
   const dispatch = useDispatch();
   const { results, message } = useFetch({
-    url: "https://dailydealsbackend-26.onrender.com/products",
+    url: "https://dailydealsbackend-18.onrender.com/products",
     id: null,
   });
   const token = useSelector((state) => state.auth.token);
