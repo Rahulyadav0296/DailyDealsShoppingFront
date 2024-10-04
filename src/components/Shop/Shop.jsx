@@ -13,21 +13,23 @@ function Shop() {
   const [open, setOpen] = useState(false);
   const allProducts = useSelector((state) => state.auth.allProducts);
   const dispatch = useDispatch();
-  const userId = useSelector((state) => state.auth.userId);
   const { results, message } = useFetch({
     url: "https://dailydealsbackend-26.onrender.com/products",
-    id: userId,
+    id: null,
   });
   const token = useSelector((state) => state.auth.token);
   const navigate = useNavigate();
-  useEffect(() => {
-    if (token === null) {
-      navigate("/signin");
-    }
-  }, [token]);
 
   useEffect(() => {
-    if (results) {
+    if (!token) {
+      // More readable null or undefined check
+      navigate("/signin");
+    }
+  }, [token, navigate]); // Also add `navigate` to dependency array
+
+  useEffect(() => {
+    if (results && results.length > 0) {
+      // Ensure there are actual results
       dispatch(setProducts(results));
     }
   }, [dispatch, results]);
