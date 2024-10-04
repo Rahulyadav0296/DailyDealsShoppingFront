@@ -29,7 +29,7 @@ function Cart() {
   const cartItemsDetails = useSelector((state) => state.auth.cartItemsDetails);
   const dispatch = useDispatch();
   const { results, message } = useFetch({
-    url: "http://localhost:5000",
+    url: "https://dailydealsbackend-13.onrender.com/",
     id: userId,
   });
 

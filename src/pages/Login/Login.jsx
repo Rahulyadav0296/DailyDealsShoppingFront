@@ -14,10 +14,13 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const data = await postRequest("http://localhost:5000/signin", {
-        email,
-        password,
-      });
+      const data = await postRequest(
+        "https://dailydealsbackend-13.onrender.com/signin",
+        {
+          email,
+          password,
+        }
+      );
 
       if (data.token) {
         dispatch(setToken(data.token));

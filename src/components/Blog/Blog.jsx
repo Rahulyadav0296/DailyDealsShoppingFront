@@ -1,4 +1,4 @@
-import React, { lazy, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./Blog.css";
@@ -6,16 +6,12 @@ import Categories from "./BlogCategory/Categories";
 import Search from "./BlogCategory/Search";
 import CreateBlog from "./CreateBlogs/CreateBlog";
 import ShowBlogs from "./ShowBlogs/ShowBlogs";
-const PaginationBlog = lazy(() => import("./PaginationBlog"));
-
-const POST_PER_PAGE = 5;
 
 function Blog() {
-  const [currentPage, setCurrentPage] = useState(1);
   const [searchBlog, setSearchBlog] = useState("");
   const blog = useSelector((state) => state.auth.blog);
-  const [filterBlogs, setFilterBlogs] = useState(null);
   const [showCreate, setShowCreate] = useState(false);
+  const [filterBlogs, setFilterBlogs] = useState("");
   const navigate = useNavigate();
   const token = useSelector((state) => state.auth.token);
 
@@ -28,22 +24,6 @@ function Blog() {
       navigate("/signin");
     }
   }, [token]);
-
-  // calculate number of pages
-  const totalPages = Math.ceil(
-    filterBlogs && filterBlogs.length / POST_PER_PAGE
-  );
-
-  // calculate the index index range for the current page
-  const startIndex = (currentPage - 1) * POST_PER_PAGE;
-  const endIndex = startIndex + POST_PER_PAGE;
-  const currentBlogs = filterBlogs && filterBlogs.slice(startIndex, endIndex);
-
-  const handlePageChange = (page) => {
-    if (page >= 1 && page <= totalPages) {
-      setCurrentPage(page);
-    }
-  };
 
   const handleChange = (e) => {
     setSearchBlog(e.target.value);
@@ -88,19 +68,11 @@ function Blog() {
           )}
         </div>
         <div className="blogs-section">
-          <ShowBlogs />
+          <ShowBlogs
+            filterBlogs={filterBlogs}
+            setFilterBlogs={setFilterBlogs}
+          />
         </div>
-        {/* <PaginationBlog
-          currentBlogs={currentBlogs}
-          currentPage={currentPage}
-          totalPages={totalPages}
-          handleNext={() => {
-            handlePageChange(currentPage + 1);
-          }}
-          handlePrev={() => {
-            handlePageChange(currentPage - 1);
-          }}
-        /> */}
       </div>
     </div>
   );

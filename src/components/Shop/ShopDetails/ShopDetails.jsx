@@ -5,27 +5,28 @@ import { setCartItem } from "../../../utils/authSlice";
 
 function ShopDetails({ product, setOpen }) {
   const navigate = useNavigate();
-  // const { userId, cartItem, setCartItem } = useContext(AuthContext);
   const userId = useSelector((state) => state.auth.userId);
-  const cartItem = useSelector((state) => state.auth.cartItem);
   const dispatch = useDispatch();
   // console.log(userId);
   const handleCart = async (productId) => {
     try {
       console.log("Sending request to add product to cart:", productId);
 
-      const response = await fetch("http://localhost:5000/add", {
-        // Correct endpoint
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId: userId,
-          productId: productId,
-          quantity: 1, // Set to a valid quantity
-        }),
-      });
+      const response = await fetch(
+        "https://dailydealsbackend-13.onrender.com/add",
+        {
+          // Correct endpoint
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userId: userId,
+            productId: productId,
+            quantity: 1, // Set to a valid quantity
+          }),
+        }
+      );
 
       console.log("Response from server:", response);
 

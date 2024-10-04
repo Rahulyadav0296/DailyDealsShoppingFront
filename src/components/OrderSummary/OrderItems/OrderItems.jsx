@@ -8,7 +8,7 @@ const getDate = (date) => {
   const tomorrow = new Date(date);
   tomorrow.setDate(currentDate.getDate() + 1);
 
-  // Add 10 more days to tomorrwo to get the delivery date
+  // Add 10 more days to tomorrow to get the delivery date
   const deliveryDate = new Date(tomorrow);
   deliveryDate.setDate(tomorrow.getDate() + 10);
 

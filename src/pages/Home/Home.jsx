@@ -14,7 +14,7 @@ function Home() {
   const userId = useSelector((state) => state.auth.userId);
   const [account, setAccount] = useState("");
   const { results, message } = useFetch({
-    url: "http://localhost:5000/users",
+    url: "https://dailydealsbackend-13.onrender.com/users",
     id: userId,
   });
 

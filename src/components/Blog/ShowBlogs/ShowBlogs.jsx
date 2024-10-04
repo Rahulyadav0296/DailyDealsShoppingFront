@@ -8,18 +8,17 @@ import useFetch from "../../Hooks/useFetch";
 import BlogModal from "../Modal/BlogModal";
 import "./ShowBlogs.css";
 
-function ShowBlogs() {
+function ShowBlogs({ filterBlogs, setFilterBlogs }) {
   const userId = useSelector((state) => state.auth.userId);
   const blog = useSelector((state) => state.auth.blog);
   const modalRef = useRef();
   const [open, setOpen] = useState(false);
   const [blogContent, setBlogContent] = useState(null);
-  const [filterBlogDetails, setFilterBlogDetails] = useState(null);
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
   const dispatch = useDispatch();
   const { results } = useFetch({
-    url: "http://localhost:5000/blog",
+    url: "https://dailydealsbackend-13.onrender.com/blog",
     id: userId,
   });
 
@@ -32,7 +31,7 @@ function ShowBlogs() {
   }, [results, userId, navigate]);
 
   useEffect(() => {
-    setFilterBlogDetails(blog);
+    setFilterBlogs(blog);
   }, [blog]);
 
   const handleBlogById = (id) => {
@@ -63,11 +62,11 @@ function ShowBlogs() {
         },
       });
       if (!response.ok) {
-        throw new Error("Faild to delete the blog post");
+        throw new Error("Failed to delete the blog post");
       }
       const data = await response.json();
-      const remainBlogs = blogs.filter((blog, index) => blog._id !== id);
-      setFilterBlogDetails(remainBlogs);
+      const remainBlogs = blog.filter((blog, index) => blog._id !== id);
+      setFilterBlogs(remainBlogs);
       setMessage(data.message);
     } catch (error) {
       console.error(error);
@@ -77,8 +76,8 @@ function ShowBlogs() {
 
   return (
     <div className="blog-list">
-      {filterBlogDetails && filterBlogDetails.length > 0 ? (
-        filterBlogDetails.map((blog) => (
+      {filterBlogs && filterBlogs.length > 0 ? (
+        filterBlogs.map((blog) => (
           <div className="blog-card" key={blog._id}>
             <div
               className="blog-image-container"

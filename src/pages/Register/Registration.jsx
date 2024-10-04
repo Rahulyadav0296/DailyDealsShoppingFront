@@ -33,11 +33,11 @@ function Registration() {
     e.preventDefault();
     try {
       const data = await postRequest(
-        "http://localhost:5000/signup",
+        "https://dailydealsbackend-13.onrender.com/signup",
         user,
         token
       );
-      console.log("Data after resistration is: ", data);
+      console.log("Data after registration is: ", data);
       setUser(initialState);
       navigate("/signin");
     } catch (error) {

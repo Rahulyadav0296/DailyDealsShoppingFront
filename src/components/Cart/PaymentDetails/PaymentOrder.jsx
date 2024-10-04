@@ -111,7 +111,7 @@ function PaymentOrder() {
     console.log(cardElement);
     try {
       const response = await fetch(
-        "http://localhost:5000/create-payment-intent",
+        "https://dailydealsbackend-13.onrender.com/create-payment-intent",
         {
           method: "POST",
           headers: {

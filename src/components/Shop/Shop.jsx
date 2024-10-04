@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { setProducts } from "../../utils/authSlice";
+import useFetch from "../Hooks/useFetch";
 import ModalView from "./ModalView";
 import FilterProduct from "./Product/FilterProduct/FilterProduct";
 import "./Shop.css";
@@ -11,15 +13,23 @@ function Shop() {
   const [open, setOpen] = useState(false);
   const allProducts = useSelector((state) => state.auth.allProducts);
   const dispatch = useDispatch();
+  const { results, message } = useFetch({
+    url: "https://dailydealsbackend-13.onrender.com/products",
+    id: null,
+  });
+  const token = useSelector((state) => state.auth.token);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (token === null) {
+      navigate("/signin");
+    }
+  }, [token]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/products")
-      .then((res) => res.json())
-      .then((data) => {
-        dispatch(setProducts(data));
-      })
-      .catch((err) => console.error(err));
-  }, [dispatch]);
+    if (results) {
+      dispatch(setProducts(results));
+    }
+  }, [dispatch, results]);
 
   useEffect(() => {
     if (open) {
@@ -46,13 +56,14 @@ function Shop() {
             />
           ))
         ) : (
-          <p>No products available</p>
+          <p>Loading...</p>
         )}
         <ModalView
           message="Item added Successfully!"
           open={open}
           onClose={() => setOpen(false)}
         />
+        {message && <p>{message}</p>}
       </div>
     </>
   );

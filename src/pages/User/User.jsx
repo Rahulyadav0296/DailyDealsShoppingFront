@@ -24,7 +24,7 @@ function User() {
   const [editableUser, setEditableUser] = useState(true);
   const [user, setUser] = useState(null);
   const { results, message } = useFetch({
-    url: "http://localhost:5000/users",
+    url: "https://dailydealsbackend-13.onrender.com/users",
     id: userId,
   });
 
