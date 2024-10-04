@@ -77,7 +77,7 @@ function CartItemsSummary() {
       }
 
       const data = await postRequest(
-        "http://localhost:5000/remove",
+        "https://dailydealsbackend-26.onrender.com/remove",
         {
           userId: userId,
           productId: productId,

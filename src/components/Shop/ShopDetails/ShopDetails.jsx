@@ -7,13 +7,13 @@ function ShopDetails({ product, setOpen }) {
   const navigate = useNavigate();
   const userId = useSelector((state) => state.auth.userId);
   const dispatch = useDispatch();
-  // console.log(userId);
+
   const handleCart = async (productId) => {
     try {
       console.log("Sending request to add product to cart:", productId);
 
       const response = await fetch(
-        "https://dailydealsbackend-13.onrender.com/add",
+        "https://dailydealsbackend-26.onrender.com/add",
         {
           // Correct endpoint
           method: "POST",

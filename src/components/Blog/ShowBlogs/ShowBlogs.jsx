@@ -18,7 +18,7 @@ function ShowBlogs({ filterBlogs, setFilterBlogs }) {
   const [message, setMessage] = useState("");
   const dispatch = useDispatch();
   const { results } = useFetch({
-    url: "https://dailydealsbackend-13.onrender.com/blog",
+    url: "https://dailydealsbackend-26.onrender.com/blog",
     id: userId,
   });
 

@@ -33,7 +33,7 @@ function Registration() {
     e.preventDefault();
     try {
       const data = await postRequest(
-        "https://dailydealsbackend-13.onrender.com/signup",
+        "https://dailydealsbackend-26.onrender.com/signup",
         user,
         token
       );
