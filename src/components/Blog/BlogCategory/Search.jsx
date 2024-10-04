@@ -10,7 +10,6 @@ function Search({ searchBlog, onChange, onSubmit }) {
         value={searchBlog}
         onChange={onChange}
         className="search-input"
-        placeholder="Search blogs..."
       />
     </form>
   );

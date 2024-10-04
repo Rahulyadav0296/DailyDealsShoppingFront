@@ -1,30 +1,38 @@
 import React from "react";
-import { blogs } from "../../../utils/blogs";
+import { useSelector } from "react-redux";
 import "./Categories.css";
-const countCategories = (blogs) => {
-  const categoryCounts = {};
-
-  blogs.forEach((blog) => {
-    blog.category.split(", ").forEach((category) => {
-      if (categoryCounts[category]) {
-        categoryCounts[category]++;
-      } else {
-        categoryCounts[category] = 1;
-      }
-    });
-  });
-  return categoryCounts;
-};
-
-const categoryCounts = countCategories(blogs);
 
 function Categories({ setFilterBlogs }) {
+  const blog = useSelector((state) => state.auth.blog);
+
   const handleCategory = (category) => {
-    const newBlogs = blogs.filter((blog) =>
-      blog.category.toLowerCase().includes(category.toLowerCase())
+    const newBlogs = blog.filter((b) =>
+      b.category.toLowerCase().includes(category.toLowerCase())
     );
+    console.log("Filtered blog is: ", newBlogs);
     setFilterBlogs(newBlogs);
   };
+
+  const countCategories = (blog) => {
+    const categoryCounts = {};
+
+    if (blog && blog.length > 0) {
+      blog.forEach((b) => {
+        b.category.split(",").forEach((category) => {
+          const trimmedCategory = category.trim(); // Trim extra spaces
+          if (categoryCounts[trimmedCategory]) {
+            categoryCounts[trimmedCategory]++;
+          } else {
+            categoryCounts[trimmedCategory] = 1;
+          }
+        });
+      });
+    }
+    return categoryCounts;
+  };
+
+  const categoryCounts = countCategories(blog);
+
   return (
     <div className="categories-container">
       <h3 className="categories-title">Category</h3>

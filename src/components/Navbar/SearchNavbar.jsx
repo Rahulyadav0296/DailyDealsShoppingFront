@@ -39,7 +39,6 @@ function SearchNavbar() {
     const filteredProducts = products.filter((product) => {
       return product.name.toLowerCase().includes(search.toLowerCase());
     });
-    console.log("Items after search navbar", filteredProducts);
     dispatch(setAllProducts(filteredProducts));
     setSearch("");
   };
@@ -47,7 +46,6 @@ function SearchNavbar() {
   const handleProductSearch = (id) => {
     console.log(id);
     const item = filterProducts.filter((item, index) => item._id === id);
-    console.log("The item is: ", item[0].name);
     setSearch(item[0].name);
     setProductVisible(false);
   };
@@ -61,11 +59,10 @@ function SearchNavbar() {
           type="text"
           value={search}
           onChange={handleChange}
-          placeholder="Search..."
         />
         {productVisible && (
           <div>
-            {filterProducts.length > 0 ? (
+            {filterProducts.length > 0 &&
               filterProducts.map((product, index) => (
                 <div key={`${product._id} - ${index}`}>
                   <p
@@ -76,10 +73,7 @@ function SearchNavbar() {
                     {product.name}
                   </p>
                 </div>
-              ))
-            ) : (
-              <p>No Product Found</p>
-            )}
+              ))}
           </div>
         )}
       </div>

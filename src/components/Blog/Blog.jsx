@@ -1,8 +1,11 @@
-import React, { lazy, Suspense, useState } from "react";
-import { blogs } from "../../utils/blogs";
+import React, { lazy, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import "./Blog.css";
 import Categories from "./BlogCategory/Categories";
 import Search from "./BlogCategory/Search";
+import CreateBlog from "./CreateBlogs/CreateBlog";
+import ShowBlogs from "./ShowBlogs/ShowBlogs";
 const PaginationBlog = lazy(() => import("./PaginationBlog"));
 
 const POST_PER_PAGE = 5;
@@ -10,15 +13,31 @@ const POST_PER_PAGE = 5;
 function Blog() {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchBlog, setSearchBlog] = useState("");
-  const [filterBlogs, setFilterBlogs] = useState(blogs);
+  const blog = useSelector((state) => state.auth.blog);
+  const [filterBlogs, setFilterBlogs] = useState(null);
+  const [showCreate, setShowCreate] = useState(false);
+  const navigate = useNavigate();
+  const token = useSelector((state) => state.auth.token);
+
+  useEffect(() => {
+    setFilterBlogs(blog);
+  }, [blog]);
+
+  useEffect(() => {
+    if (token === null) {
+      navigate("/signin");
+    }
+  }, [token]);
 
   // calculate number of pages
-  const totalPages = Math.ceil(filterBlogs.length / POST_PER_PAGE);
+  const totalPages = Math.ceil(
+    filterBlogs && filterBlogs.length / POST_PER_PAGE
+  );
 
   // calculate the index index range for the current page
   const startIndex = (currentPage - 1) * POST_PER_PAGE;
   const endIndex = startIndex + POST_PER_PAGE;
-  const currentBlogs = filterBlogs.slice(startIndex, endIndex);
+  const currentBlogs = filterBlogs && filterBlogs.slice(startIndex, endIndex);
 
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
@@ -32,7 +51,7 @@ function Blog() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newBlogs = blogs.filter((blog) =>
+    const newBlogs = blog.filter((blog) =>
       blog.category.toLowerCase().includes(searchBlog.toLowerCase())
     );
     setSearchBlog("");
@@ -49,18 +68,29 @@ function Blog() {
         />
         <Categories setFilterBlogs={setFilterBlogs} />
       </div>
-      <Suspense
-        fallback={
-          <div className="loading-container">
-            <img
-              src="https://i.giphy.com/jAYUbVXgESSti.webp"
-              alt="Loading..."
-              className="loading-image"
-            />
-          </div>
-        }
-      >
-        <PaginationBlog
+      <div>
+        <div className="home-container">
+          {/* Create New Blog Button */}
+          <button
+            className="create-blog-btn"
+            onClick={() => {
+              setShowCreate(!showCreate);
+            }}
+          >
+            {showCreate ? "Hide Create Blog" : "Create Blog"}
+          </button>
+
+          {/* Show Create Blog Form */}
+          {showCreate && (
+            <div className="create-blog-section">
+              <CreateBlog setShowCreate={setShowCreate} />
+            </div>
+          )}
+        </div>
+        <div className="blogs-section">
+          <ShowBlogs />
+        </div>
+        {/* <PaginationBlog
           currentBlogs={currentBlogs}
           currentPage={currentPage}
           totalPages={totalPages}
@@ -70,8 +100,8 @@ function Blog() {
           handlePrev={() => {
             handlePageChange(currentPage - 1);
           }}
-        />
-      </Suspense>
+        /> */}
+      </div>
     </div>
   );
 }

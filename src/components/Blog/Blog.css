@@ -13,6 +13,14 @@
   width: 500px;
 }
 
+.create-blog-btn {
+  color: white;
+  background-color: rgb(14, 139, 31);
+  border: none;
+  padding: 10px;
+  border-radius: 25px;
+}
+
 @keyframes loadingAnimation {
   0% {
     opacity: 1;

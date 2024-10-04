@@ -42,7 +42,6 @@ function Cart() {
   if (!cartItemsDetails || !cartItemsDetails.items) {
     return <EmptyCart />;
   }
-  console.log("the cart items details", cartItemsDetails);
 
   return (
     <Div>

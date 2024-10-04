@@ -13,6 +13,9 @@ const initialState = {
   token: null,
   products: [],
   allProducts: [],
+  blog: [],
+  editBlog: false,
+  blogId: null,
 };
 
 const authSlice = createSlice({
@@ -36,6 +39,16 @@ const authSlice = createSlice({
         totalQuantity: action.payload.totalQuantity || 0,
         totalPrice: action.payload.totalPrice || 0,
       };
+    },
+    setBlog(state, action) {
+      // Ensure that the payload contains the necessary information
+      state.blog = action.payload;
+    },
+    setBlogId(state, action) {
+      state.blogId = action.payload;
+    },
+    setEditBlog(state, action) {
+      state.editBlog = action.payload;
     },
     setOrders(state, action) {
       state.orders = action.payload;
@@ -65,6 +78,9 @@ export const {
   setMessage,
   clearMessage,
   setToken,
+  setBlog,
+  setBlogId,
+  setEditBlog,
 } = authSlice.actions;
 
 export default authSlice.reducer;
